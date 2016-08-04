@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+
+	<title>Project</title>
+	<meta charset="utf-8">
+
+<!-- 	<script src="jquery-1.11.2.min.js"></script> -->
+	<link rel="stylesheet"  href="style.css" >
+<!-- 	<script src="app.js"></script> -->
+	
+</head>
+
+
+
+<body>
+	
+	<div id="wrapper">
+
+		<header>
+			<h1>Information Retrieval System</h1>
+		</header>
+
+		<form name="form" action="search.php" method="get">
+			<label>Search:</label>
+			<input id="searchInput" type="text" name="searchInput" value="" placeholder="Enter a Word">
+			<input type="submit" value="Submit">
+		</form>
+		
+		<h3>Reserved Words</h3>
+		<iframe id="iframeSearch" name="myPHPScript" src="reservedWords.php" height="100%" frameborder="0"></iframe>
+
+		<h3>Lyrics Tables</h3>
+		<iframe id="iframeTables" name="myPHPScript" src="getTables.php" height="100%" frameborder="1"></iframe>
+
+	</div>
+
+</body>
+
+</html>
