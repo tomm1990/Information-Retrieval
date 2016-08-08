@@ -2,17 +2,43 @@
 
 function buildInvertedIndex($filenames)
 {
+
+    // craate sql connection
+    $servername = "localhost";
+    $username = "galServer";
+    $password = "301gals20";
+    $dbname = "myDB";
+
+    // Create connection
+    $conn = mysqli_connect($servername, $username, $password, $dbname);
+    // Check connection
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    // Create database
+    //$sql = "CREATE DATABASE myDB";
+
+     $sql = "CREATE TABLE MyGuests (
+        id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        fileNo VARCHAR(30) NOT NULL,
+        word VARCHAR(30) NOT NULL,
+        offset VARCHAR(30) NOT NULL
+    )";
+
+    if (mysqli_query($conn, $sql)) {
+        echo "Database created successfully";
+    } else {
+        echo "Error creating database: " . mysqli_error($conn);
+    }
+
+    //mysqli_close($conn);
+
     $invertedIndex = [];
     $filesCounter = 0;
 
     foreach($filenames as $filename)
     {
-        $sql = "CREATE TABLE MyGuests (
-        fileNo INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        word VARCHAR(30) NOT NULL,
-        offset VARCHAR(30) NOT NULL
-        )";
-
         $data = file_get_contents($filename);
 
         if($data === false) die('Unable to read file: ' . $filename);
@@ -27,8 +53,15 @@ function buildInvertedIndex($filenames)
 
             $wordsCounter++;
 
+            echo ($wordsCounter);
+
             $addToSql = "INSERT INTO MyGuests (fileNo, word, offset)
-            VALUES ($filesCounter, $word, $wordsCounter)";
+            VALUES ('$filesCounter', '$word', '$wordsCounter')";
+            if (mysqli_query($conn, $addToSql)) {
+                echo "New record created successfully<br>";
+            } else {
+                echo "Error: " . $addToSql . "<br>" . mysqli_error($conn);
+            }
 
             if(!array_key_exists($word, $invertedIndex)) $invertedIndex[$word] = [];
             if(!in_array($filename, $invertedIndex[$word], true)) $invertedIndex[$word][] = $filename;
