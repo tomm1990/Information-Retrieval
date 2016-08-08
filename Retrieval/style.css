@@ -59,11 +59,10 @@ iframe {
 }
 
 #iframeSearch {
-	width: 950px;
+	width: 990px;
 	height: 280px;
 	float: left;
 	margin-top: -20px;
-
 }
 
 #iframeTables {
