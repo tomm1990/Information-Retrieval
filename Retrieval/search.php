@@ -19,7 +19,7 @@ function buildInvertedIndex($filenames)
     // Create database
     //$sql = "CREATE DATABASE myDB";
 
-     $sql = "CREATE TABLE MyTable4 (
+     $sql = "CREATE TABLE Hits (
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         fileNo VARCHAR(30) NOT NULL,
         word VARCHAR(30) NOT NULL,
@@ -30,14 +30,16 @@ function buildInvertedIndex($filenames)
     if (mysqli_query($conn, $sql)) {
         echo "Database created successfully";
     } else {
-        echo "Error creating database: " . mysqli_error($conn)."<br>";
-        echo "Delete the Old Table...<br>";
-        $deleteSql = "DELETE FROM MyTable4";
+        //echo "Error creating database: " . mysqli_error($conn)."<br>";
+        //echo "Delete the Old Table...<br>";
+        $deleteSql = "DROP TABLE Hits";
         if (mysqli_query($conn, $deleteSql)) {
-                echo "Old record Deleted successfully<br>";
+            echo "Old record Deleted successfully<br>";
+            mysqli_query($conn, $sql);
             } else {
                 echo "Error: " . $deleteSql . "<br>" . mysqli_error($conn);
             }
+
 
 
     }
@@ -54,7 +56,7 @@ function buildInvertedIndex($filenames)
         if($data === false) die('Unable to read file: ' . $filename);
         $filesCounter++;
         preg_match_all('/(\w+)/', $data, $matches, PREG_SET_ORDER);
-        
+
         $wordsCounter = 0;
 
         foreach($matches as $match)
@@ -65,12 +67,13 @@ function buildInvertedIndex($filenames)
 
             echo ($wordsCounter);
 
-            $addToSql = "IF NOT EXISTS (SELECT word, hits FROM MyTable4 WHERE word = '$word') BEGIN
-                            INSERT INTO MyTable4 (fileNo, word, offset, hits)
-                            VALUES ('$filesCounter', '$word', '$wordsCounter', 1)
-                        ELSE
-                            UPDATE MyTable4 SET hits=hits+1 WHERE word = '$word'
-                        END";
+//            $addToSql = "IF NOT EXISTS (SELECT word, hits FROM MyTable4 WHERE word = '$word') BEGIN
+            $addToSql="INSERT INTO Hits (fileNo, word, offset, hits)
+                    VALUES ('$filesCounter', '$word', '$wordsCounter', 1)
+                    ON DUPLICATE KEY UPDATE hits = hits + 1";
+//                        ELSE
+//                            UPDATE MyTable4 SET hits=hits+1 WHERE word = '$word'
+//                        END";
 
 
 
@@ -90,7 +93,7 @@ function buildInvertedIndex($filenames)
 
     return $invertedIndex;
 }
- 
+
 
 
 
@@ -99,13 +102,13 @@ function lookupWord($invertedIndex, $word)
 {
     return array_key_exists($word, $invertedIndex) ? $invertedIndex[$word] : false;
 }
- 
+
 $invertedIndex = buildInvertedIndex(['file1.txt', 'file2.txt', 'file3.txt']);
-    
+
     // Get Search Input & find
     $word = $_GET['searchInput'];
     $matches = lookupWord($invertedIndex, $word);
- 
+
     if($matches !== false)
     {
         echo "<img src='images/v.png' style='width: 30px;'>";
@@ -116,7 +119,7 @@ $invertedIndex = buildInvertedIndex(['file1.txt', 'file2.txt', 'file3.txt']);
     {
         echo "<img src='images/x.png' style='width: 25px; margin-right: 10px;'>";
         echo "Unable to find the word <span style='color: #00135D; font-weight: bold;'> \"$word\"</span> in the index\n";
-        echo "<br><br>";        
+        echo "<br><br>";
     }
 //}
 
