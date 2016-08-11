@@ -19,17 +19,27 @@ function buildInvertedIndex($filenames)
     // Create database
     //$sql = "CREATE DATABASE myDB";
 
-     $sql = "CREATE TABLE MyGuests (
+     $sql = "CREATE TABLE MyTable4 (
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         fileNo VARCHAR(30) NOT NULL,
         word VARCHAR(30) NOT NULL,
-        offset VARCHAR(30) NOT NULL
+        offset VARCHAR(30) NOT NULL,
+        hits INT NOT NULL
     )";
 
     if (mysqli_query($conn, $sql)) {
         echo "Database created successfully";
     } else {
-        echo "Error creating database: " . mysqli_error($conn);
+        echo "Error creating database: " . mysqli_error($conn)."<br>";
+        echo "Delete the Old Table...<br>";
+        $deleteSql = "DELETE FROM MyTable4";
+        if (mysqli_query($conn, $deleteSql)) {
+                echo "Old record Deleted successfully<br>";
+            } else {
+                echo "Error: " . $deleteSql . "<br>" . mysqli_error($conn);
+            }
+
+
     }
 
     //mysqli_close($conn);
@@ -55,8 +65,18 @@ function buildInvertedIndex($filenames)
 
             echo ($wordsCounter);
 
-            $addToSql = "INSERT INTO MyGuests (fileNo, word, offset)
-            VALUES ('$filesCounter', '$word', '$wordsCounter')";
+            $addToSql = "IF NOT EXISTS (SELECT word, hits FROM MyTable4 WHERE word = '$word') BEGIN
+                            INSERT INTO MyTable4 (fileNo, word, offset, hits)
+                            VALUES ('$filesCounter', '$word', '$wordsCounter', 1)
+                        ELSE
+                            UPDATE MyTable4 SET hits=hits+1 WHERE word = '$word'
+                        END";
+
+
+
+//            INSERT INTO MyTable3 (fileNo, word, offset, hits)
+//            VALUES ('$filesCounter', '$word', '$wordsCounter', 1)
+//            ON DUPLICATE KEY UPDATE hits = hits + 1";
             if (mysqli_query($conn, $addToSql)) {
                 echo "New record created successfully<br>";
             } else {
