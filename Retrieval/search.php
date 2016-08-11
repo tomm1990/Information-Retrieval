@@ -23,7 +23,7 @@ function buildInvertedIndex($filenames)
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         fileNo VARCHAR(30) NOT NULL,
         word VARCHAR(30) NOT NULL,
-        offset VARCHAR(30) NOT NULL,
+        offset INT(6) UNSIGNED NOT NULL,
         hits INT NOT NULL
     )";
 
@@ -39,9 +39,6 @@ function buildInvertedIndex($filenames)
             } else {
                 echo "Error: " . $deleteSql . "<br>" . mysqli_error($conn);
             }
-
-
-
     }
 
     //mysqli_close($conn);
