@@ -56,6 +56,12 @@ foreach(['guitar', 'love', 'beatles', 'hate'] as $word)
  
     if($matches !== false)
     {   
+
+        //echo "<div class='alert alert-success' role='alert'>'blablabla'</div>";
+
+
+
+
         echo "<img src='images/v.png' style='width: 30px;'>";
         echo "Found the word <span style='color: #00135D; font-weight: bold;'>\"$word\"</span> in the following files: <span style='color: #004621; font-weight: bold;'>" . implode(' , ', $matches) . "</span>\n";
         echo "<br><br>";
