@@ -20,7 +20,8 @@ function buildInvertedIndex($filenames){
         songName VARCHAR(30) NOT NULL,
         songAuthor VARCHAR(30) NOT NULL,
         songDate DATE,
-        songSummery VARCHAR(130),
+        songSummary VARCHAR(130),
+        songLyrics VARCHAR(2000),
         songPic LONGBLOB)";
 
 
@@ -38,7 +39,7 @@ function buildInvertedIndex($filenames){
     } else {
         $deleteSql = "DROP TABLE Files";
         if (mysqli_query($conn, $deleteSql)) {
-            echo "Old files was deleted successfully<br>";
+            echo "Table Files was deleted successfully<br>";
             mysqli_query($conn, $sqlFiles);
             } else {
                 echo "Error: " . $deleteSql . "<br>" . mysqli_error($conn);
@@ -50,7 +51,7 @@ function buildInvertedIndex($filenames){
     } else {
         $deleteSql = "DROP TABLE Hits";
         if (mysqli_query($conn, $deleteSql)) {
-            echo "Old record Deleted successfully<br>";
+            echo "Table Hits was deleted successfully<br>";
             mysqli_query($conn, $sqlHits);
             } else {
                 echo "Error: " . $deleteSql . "<br>" . mysqli_error($conn);
@@ -61,38 +62,45 @@ function buildInvertedIndex($filenames){
 
     $invertedIndex = [];
     $filesCounter = 0;
+    $lyrics = false;
+    $info = "";
 
     foreach($filenames as $filename)
     {
         $data = file_get_contents($filename);
-
         if($data === false) die('Unable to read file: ' . $filename);
         $filesCounter++;
         preg_match_all('/(\w+)/', $data, $matches, PREG_SET_ORDER);
 
         $wordsCounter = 0;
-
         foreach($matches as $match)
         {
             $word = strtolower($match[0]);
 
-            $wordsCounter++;
+//            if(!$lyrics){
+//                $info.=$word;
+//                echo $info;
+//            }
 
-            echo ($wordsCounter);
-
-//            $addToSql = "IF NOT EXISTS (SELECT word, hits FROM MyTable4 WHERE word = '$word') BEGIN
             $addToSql="INSERT INTO Hits (fileNo, word, offset, hits)
-                    VALUES ('$filesCounter', '$word', '$wordsCounter', 1)
-                    ON DUPLICATE KEY UPDATE hits = hits + 1";
-            if (mysqli_query($conn, $addToSql)) {
-                echo "New record created successfully<br>";
-            } else {
-                echo "Error: " . $addToSql . "<br>" . mysqli_error($conn);
+                        VALUES ('$filesCounter', '$word', '$wordsCounter', 1)
+                        ON DUPLICATE KEY UPDATE hits = hits + 1";
+            if($lyrics==true){
+                if (mysqli_query($conn, $addToSql)) {
+                    $wordsCounter++;
+                    echo $wordsCounter.") '".$word."' New record created successfully<br>";
+                } else {
+                    echo "Error: " . $addToSql . "<br>" . mysqli_error($conn);
+                }
+            }
+            if(strcmp ( $word , "lyrics" )== 0){
+                $lyrics = true;
             }
 
             if(!array_key_exists($word, $invertedIndex)) $invertedIndex[$word] = [];
             if(!in_array($filename, $invertedIndex[$word], true)) $invertedIndex[$word][] = $filename;
         }
+        $lyrics = false;
     }
 
     return $invertedIndex;
