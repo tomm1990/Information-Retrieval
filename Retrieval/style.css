@@ -2,11 +2,118 @@ body {
 	background : url(images/background_img.jpg) ;
 	background-size : 100% 100% ;
 	background-attachment:fixed ;
-	height : 100%
+	height : 100%;
+    font-family: "Levenim MT" , arial;
+    color : aliceblue;
+}
+
+#wrapperIntro{
+    background: url(images/backgroundBlack.jpg);
+    background-size : 100% 100% ;
+	background-attachment:fixed ;
+}
+
+#wrapperIntro > header{
+    position: relative;
+    height : 80px;
+    border : 2px solid aliceblue;
+    border-radius: 15px;
+    margin-top: 1%;
+}
+
+#wrapperIntro > header > h1{
+    display: inline;
+    float : left;
+    margin-top:1.5%;
+    margin-left: 2%;
+    font-family: "Levenim MT" , arial;
+    color : aliceblue;
+}
+
+header nav{
+    //position: absolute;
+    margin-left : 5%;
+    float : left;
+    display: inline;
+    //width : 70%;
+    height : 45%;
+    bottom: 2px;
+}
+
+header nav ul{
+    margin-top: 4%;
+    width : 100%;
+    list-style: none;
+    height : 100%;
+}
+
+header nav ul li{
+    display : inline;
+    font-family: "Levenim MT" , arial;
+    margin : 2px 20px 13px 30px;
+    font-size : 20px;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color : aliceblue;
+    transition: 0.25s ease-in;
+}
+
+nav ul li a:hover , a:focus , a:active{
+    text-decoration: none;
+    color : #62ae6e;
+    border-bottom: 5px solid #419645;
+    cursor: pointer;
+}
+
+.files_container{
+    width : 80%;
+    margin: auto;
+    margin-top: 5%;
+
+}
+
+.files_container > nav{
+    float : left;
+
+}
+
+.files_container > nav > .btn-group-vertical{
+    //margin-right : 13%;
+    //float : left;
+}
+
+.files_container > nav > .btn-group-vertical > button{
+    height : 75px;
+}
+
+
+.files_container > .list-group{
+    float:left;
+    margin-left: 5%;
+}
+
+.files_container > .list-group > a{
+    width : 250%;
+    height : 120px;
+}
+
+.navbar-inverse{
+    color : white;
+}
+
+a > img{
+    position: absolute;
+    width : 30px;
+    height : 30px;
+    right : 54px;
+    top : 44px;
+
 }
 
 img{
-    border : 1px solid red;
+
 }
 header {
 	display : block;

@@ -1,9 +1,13 @@
 $( document ).ready(function() {
-    var cssLink = document.createElement("link") ;
-    cssLink.href = "../style.css";
-    cssLink.rel = "stylesheet";
-    cssLink.type = "text/css";
-    var t = document.getElementById("iframeTables")[0];
-    t.body.appendChild(cssLink);
-    //frames['iframeTables'].document.head.appendChild(cssLink);
+    //Placing the elements in diagram.html
+    $.ajax({
+        type : "POST",
+        url : "includes/file_bars.php",
+        cache : true,
+        success:function(html){
+            $("files_bar").html(html);
+        }
+    });
+
+
 });

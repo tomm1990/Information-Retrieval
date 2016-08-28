@@ -1,8 +1,6 @@
 <?php
 
-function buildInvertedIndex($filenames)
-{
-
+function buildInvertedIndex($filenames){
     // craate sql connection
     $servername = "localhost";
     $username = "galServer";
@@ -16,10 +14,17 @@ function buildInvertedIndex($filenames)
         die("Connection failed: " . mysqli_connect_error());
     }
 
-    // Create database
-    //$sql = "CREATE DATABASE myDB";
+    $sqlFiles ="CREATE TABLE Files(
+        fileID INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        fileName VARCHAR(30) NOT NULL,
+        songName VARCHAR(30) NOT NULL,
+        songAuthor VARCHAR(30) NOT NULL,
+        songDate DATE,
+        songSummery VARCHAR(130),
+        songPic LONGBLOB)";
 
-     $sql = "CREATE TABLE Hits (
+
+    $sqlHits = "CREATE TABLE Hits (
         id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
         fileNo VARCHAR(30) NOT NULL,
         word VARCHAR(30) NOT NULL,
@@ -27,15 +32,26 @@ function buildInvertedIndex($filenames)
         hits INT NOT NULL
     )";
 
-    if (mysqli_query($conn, $sql)) {
-        echo "Database created successfully";
+
+    if (mysqli_query($conn, $sqlFiles)) {
+        echo "Files Table successfully created";
     } else {
-        //echo "Error creating database: " . mysqli_error($conn)."<br>";
-        //echo "Delete the Old Table...<br>";
+        $deleteSql = "DROP TABLE Files";
+        if (mysqli_query($conn, $deleteSql)) {
+            echo "Old files was deleted successfully<br>";
+            mysqli_query($conn, $sqlFiles);
+            } else {
+                echo "Error: " . $deleteSql . "<br>" . mysqli_error($conn);
+            }
+    }
+
+    if (mysqli_query($conn, $sqlHits)) {
+        echo "Hits table successfully created";
+    } else {
         $deleteSql = "DROP TABLE Hits";
         if (mysqli_query($conn, $deleteSql)) {
             echo "Old record Deleted successfully<br>";
-            mysqli_query($conn, $sql);
+            mysqli_query($conn, $sqlHits);
             } else {
                 echo "Error: " . $deleteSql . "<br>" . mysqli_error($conn);
             }
@@ -68,15 +84,6 @@ function buildInvertedIndex($filenames)
             $addToSql="INSERT INTO Hits (fileNo, word, offset, hits)
                     VALUES ('$filesCounter', '$word', '$wordsCounter', 1)
                     ON DUPLICATE KEY UPDATE hits = hits + 1";
-//                        ELSE
-//                            UPDATE MyTable4 SET hits=hits+1 WHERE word = '$word'
-//                        END";
-
-
-
-//            INSERT INTO MyTable3 (fileNo, word, offset, hits)
-//            VALUES ('$filesCounter', '$word', '$wordsCounter', 1)
-//            ON DUPLICATE KEY UPDATE hits = hits + 1";
             if (mysqli_query($conn, $addToSql)) {
                 echo "New record created successfully<br>";
             } else {
