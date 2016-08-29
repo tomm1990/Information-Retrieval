@@ -51,7 +51,7 @@ function buildInvertedIndex($filenames){
     } else {
         $deleteSql = "DROP TABLE Hits";
         if (mysqli_query($conn, $deleteSql)) {
-            echo "Table Hits was deleted successfully<br>";
+            echo "Table Hits was deleted successfully<br><br>";
             mysqli_query($conn, $sqlHits);
             } else {
                 echo "Error: " . $deleteSql . "<br>" . mysqli_error($conn);
@@ -77,32 +77,41 @@ function buildInvertedIndex($filenames){
         {
             $word = strtolower($match[0]);
 
-//            if(!$lyrics){
-//                $info.=$word;
-//                echo $info;
-//            }
-
             $addToSql="INSERT INTO Hits (fileNo, word, offset, hits)
                         VALUES ('$filesCounter', '$word', '$wordsCounter', 1)
                         ON DUPLICATE KEY UPDATE hits = hits + 1";
-            if($lyrics==true){
+
                 if (mysqli_query($conn, $addToSql)) {
                     $wordsCounter++;
                     echo $wordsCounter.") '".$word."' New record created successfully<br>";
                 } else {
                     echo "Error: " . $addToSql . "<br>" . mysqli_error($conn);
                 }
-            }
-            if(strcmp ( $word , "lyrics" )== 0){
-                $lyrics = true;
-            }
 
             if(!array_key_exists($word, $invertedIndex)) $invertedIndex[$word] = [];
             if(!in_array($filename, $invertedIndex[$word], true)) $invertedIndex[$word][] = $filename;
         }
+
+        list($songAuthor, $songName, $songDate, $songSummary, $songPic, $songLyrics) = split(";", $data, 6);
+        echo("File Name: ".$filename."<br>");
+        echo("Author Name: ".$songAuthor."<br>");
+        echo("Song Name: ".$songName."<br>");
+        echo("Date: ".$songDate."<br>");
+        echo("Summary: ".$songSummary."<br>");
+        echo("Pic Path: ".$songPic."<br>");
+        echo("Full Lyrics: ".$songLyrics."<br><br>");
+
+         $addToFile="INSERT INTO Files (filename, songName, songAuthor, songDate, songSummary, songLyrics, songPic)
+              VALUES ('$filename', '$songName', '$songAuthor', '$songDate', '$songSummary', '$songLyrics', '$songPic')";
+
+             if (mysqli_query($conn, $addToFile)) {
+                    echo "File successfully<br>";
+                } else {
+                    echo "Error: " . $addToFile . "<br>" . mysqli_error($conn);
+                }
+
         $lyrics = false;
     }
-
     return $invertedIndex;
 }
 

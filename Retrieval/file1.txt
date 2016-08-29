@@ -1,10 +1,9 @@
-Author=THE BEATLES
-Name=A Hard Day's Night
-Date=10/7/1964
-Summary=Summary1
-Pic="images/v.png"
+THE BEATLES;
+A Hard Day's Night;
+10/7/1964;
+Summary1;
+images/v.png;
 
-Lyrics: 
 It's been a hard day's night, and I'd been working like a dog
 It's been a hard day's night, I should be sleeping like a log
 But when I get home to you I find the things that you do

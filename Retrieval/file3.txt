@@ -1,8 +1,8 @@
-THE BEATLES
-
-"While My Guitar Gently Weeps"
-
-22/11/1968
+THE BEATLES;
+While My Guitar Gently Weeps;
+14/11/1988;
+Summary3;
+images/z.png;
 
 I look at you all see the love there that's sleeping
 While my guitar gently weeps

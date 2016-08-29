@@ -1,8 +1,8 @@
-THE BEATLES
-
-"Strawberry Fields Forever"
-
-13/2/1967
+THE BEATLES;
+Strawberry Fields Forever;
+10/12/1968;
+Summary2;
+images/x.png;
 
 Let me take you down, 'cause I'm going to Strawberry Fields
 Nothing is real and nothing to get hung about

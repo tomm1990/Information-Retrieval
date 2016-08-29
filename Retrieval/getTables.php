@@ -8,7 +8,7 @@
         FROM Hits
         group BY word
         order by id";
-        $result = mysqli_query($conn,$mainTable) or die(mysqli_error());;
+        $result = mysqli_query($conn,$mainTable) or die(mysqli_error());
 
 
         echo "<table>";
