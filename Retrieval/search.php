@@ -2,6 +2,7 @@
 
 function buildInvertedIndex($filenames){
     // craate sql connection
+    //phpinfo();
     $servername = "localhost";
     $username = "galServer";
     $password = "301gals20";
@@ -92,7 +93,9 @@ function buildInvertedIndex($filenames){
             if(!in_array($filename, $invertedIndex[$word], true)) $invertedIndex[$word][] = $filename;
         }
 
-        list($songAuthor, $songName, $songDate, $songSummary, $songPic, $songLyrics) = split(";", $data, 6);
+        list($songAuthor, $songName, $songDate, $songSummary, $songPic, $songLyrics) = explode(";", $data, 6);
+
+
         echo("File Name: ".$filename."<br>");
         echo("Author Name: ".$songAuthor."<br>");
         echo("Song Name: ".$songName."<br>");
@@ -101,7 +104,7 @@ function buildInvertedIndex($filenames){
         echo("Pic Path: ".$songPic."<br>");
         echo("Full Lyrics: ".$songLyrics."<br><br>");
 
-         $addToFile="INSERT INTO Files (filename, songName, songAuthor, songDate, songSummary, songLyrics, songPic)
+         $addToFile="INSERT INTO Files (fileName, songName, songAuthor, songDate, songSummary, songLyrics, songPic)
               VALUES ('$filename', '$songName', '$songAuthor', '$songDate', '$songSummary', '$songLyrics', '$songPic')";
 
              if (mysqli_query($conn, $addToFile)) {
