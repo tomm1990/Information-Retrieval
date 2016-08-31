@@ -1,6 +1,7 @@
 <?php
 
 function buildInvertedIndex($filenames){
+    set_time_limit(0);
     // craate sql connection
     $servername = "localhost";
     $username = "galServer";
