@@ -47,7 +47,7 @@ function lookupWord($invertedIndex, $word)
     return array_key_exists($word, $invertedIndex) ? $invertedIndex[$word] : false;
 }
 
-$invertedIndex = buildInvertedIndex(['file1.txt', 'file2.txt', 'file3.txt']);
+$invertedIndex = buildInvertedIndex(['../data/file1.txt', '../data/file2.txt', '../data/file3.txt']);
 
 // Search Reserved Words
 foreach(['guitar', 'love', 'beatles', 'hate'] as $word)
@@ -57,18 +57,13 @@ foreach(['guitar', 'love', 'beatles', 'hate'] as $word)
     if($matches !== false)
     {
 
-        //echo "<div class='alert alert-success' role='alert'>'blablabla'</div>";
-
-
-
-
-        echo "<img src='images/v.png' style='width: 30px;'>";
+        echo "<img src='../images/v.png' style='width: 30px;'>";
         echo "Found the word <span style='color: #00135D; font-weight: bold;'>\"$word\"</span> in the following files: <span style='color: #004621; font-weight: bold;'>" . implode(' , ', $matches) . "</span>\n";
         echo "<br><br>";
     }
     else
     {
-        echo "<img src='images/x.png' style='width: 25px; margin-right: 10px;'>";
+        echo "<img src='../images/x.png' style='width: 25px; margin-right: 10px;'>";
         echo "Unable to find the word <span style='color: #00135D; font-weight: bold;'> \"$word\"</span> in the index\n";
         echo "<br><br>";
     }
