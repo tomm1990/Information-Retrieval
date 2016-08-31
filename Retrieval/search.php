@@ -1,5 +1,7 @@
 <?php
 
+
+
 function buildInvertedIndex($filenames){
     // craate sql connection
     //phpinfo();
@@ -20,10 +22,10 @@ function buildInvertedIndex($filenames){
         fileName VARCHAR(30) NOT NULL,
         songName VARCHAR(30) NOT NULL,
         songAuthor VARCHAR(30) NOT NULL,
-        songDate DATE,
+        songDate VARCHAR(10),
         songSummary VARCHAR(130),
         songLyrics VARCHAR(2000),
-        songPic LONGBLOB)";
+        songPic VARCHAR(100))";
 
 
     $sqlHits = "CREATE TABLE Hits (
@@ -104,14 +106,24 @@ function buildInvertedIndex($filenames){
         echo("Pic Path: ".$songPic."<br>");
         echo("Full Lyrics: ".$songLyrics."<br><br>");
 
-         $addToFile="INSERT INTO Files (fileName, songName, songAuthor, songDate, songSummary, songLyrics, songPic)
-              VALUES ('$filename', '$songName', '$songAuthor', '$songDate', '$songSummary', '$songLyrics', '$songPic')";
 
-             if (mysqli_query($conn, $addToFile)) {
-                    echo "File successfully<br>";
-                } else {
-                    echo "Error: " . $addToFile . "<br>" . mysqli_error($conn);
-                }
+        $s_fileName = "fileName";
+        $s_songName = "songName";
+        $s_songAuthor = "songAuthor";
+        $s_songDate = "songDate";
+        $s_songSummary = "songSummary";
+        $s_songLyrics = "songLyrics";
+        $s_songPic = "songPic";
+
+
+         $addToFile="INSERT INTO Files (fileName, songName, songAuthor, songDate, songSummary, songPic)
+              VALUES ('$filename','$songName', '$songAuthor', '$songDate', '$songSummary' , '$songPic')";
+
+         if (mysqli_query($conn, $addToFile)) {
+                echo "File successfully<br>";
+         } else {
+                echo "Error: " . $addToFile . "<br>" . mysqli_error($conn);
+         }
 
         $lyrics = false;
     }
@@ -127,7 +139,7 @@ function lookupWord($invertedIndex, $word)
     return array_key_exists($word, $invertedIndex) ? $invertedIndex[$word] : false;
 }
 
-$invertedIndex = buildInvertedIndex(['file1.txt', 'file2.txt', 'file3.txt']);
+$invertedIndex = buildInvertedIndex(['file1.txt']);
 
     // Get Search Input & find
     $word = $_GET['searchInput'];
