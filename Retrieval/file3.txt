@@ -2,7 +2,7 @@ THE BEATLES;
 While My Guitar Gently Weeps;
 14/11/1988;
 Summary3;
-images/z.png;
+images/x.png;
 
 lyrics:
 I look at you all see the love there that's sleeping

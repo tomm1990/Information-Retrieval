@@ -1,7 +1,5 @@
 <?php
 
-
-
 function buildInvertedIndex($filenames){
     // craate sql connection
     $servername = "localhost";

@@ -1,19 +1,18 @@
 <?php
-    include('../connection.php');
-    $query = "Select * from Files";
+    include('connection.php');
+    $query = "select * from Files";
     $result = mysqli_query($connection , $query);
     if( !$result ){
+        echo "DB query failed from file_bars.php";
         die("DB query failed from file_bars.php");
     }
-
     while( $row = mysqli_fetch_assoc($result) ){
-        echo "<tr data-toggle='collapse' data-target='#demo1' class='accordion-toggle'>";
-        echo "<td>".$row["r.num"]."</td>";
-        echo "<td>".$row["r.name"]."</td>";
-        echo "<td>".$row["r.id"]."</td>";
-        echo "<td>".$row["r.sales"]."%</td>";
-        echo "<td>".$row["r.rate"]."/5</td>";
-        echo "<td class='text-success'>".$row["r.price"].".00$</td>";
+        echo "<a href='#' class='list-group-item active'>";
+        echo '<h4 class="list-group-item-heading">'.$row["fileID"]." // ".$row["fileName"]." // ".$row["songAuthor"].'</h4>';
+         //   No. // Name of File // Author Name</h4>
+        echo '<p class="list-group-item-text">'.$row["songDate"].'</p>';
+        echo '<p class="list-group-item-text">'.$row["songSummary"].'</p>';
+        echo '<img src='.$row["songPic"].'></a>';
     }
 
     mysqli_free_result($result);

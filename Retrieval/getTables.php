@@ -1,7 +1,7 @@
 <?php
     function buildInvertedIndex($filenames)
     {
-        include('connection.php');
+        include('includes/connection.php');
         $invertedIndex = [];
         $filesCounter = 0;
         $mainTable = "SELECT id,fileNo,word,offset,SUM(hits)
