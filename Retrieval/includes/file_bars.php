@@ -1,6 +1,6 @@
 <?php
     include('connection.php');
-    //require('search.php');
+    require('search.php');
     $query = "select * from Files";
     $result = mysqli_query($connection , $query);
     if( !$result ){
