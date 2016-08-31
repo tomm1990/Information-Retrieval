@@ -4,7 +4,6 @@
 
 function buildInvertedIndex($filenames){
     // craate sql connection
-    //phpinfo();
     $servername = "localhost";
     $username = "galServer";
     $password = "301gals20";
@@ -19,9 +18,9 @@ function buildInvertedIndex($filenames){
 
     $sqlFiles ="CREATE TABLE Files(
         fileID INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        fileName VARCHAR(30) NOT NULL,
-        songName VARCHAR(30) NOT NULL,
-        songAuthor VARCHAR(30) NOT NULL,
+        fileName VARCHAR(30) ,
+        songName VARCHAR(30) ,
+        songAuthor VARCHAR(30) ,
         songDate VARCHAR(10),
         songSummary VARCHAR(130),
         songLyrics VARCHAR(2000),
@@ -84,46 +83,39 @@ function buildInvertedIndex($filenames){
                         VALUES ('$filesCounter', '$word', '$wordsCounter', 1)
                         ON DUPLICATE KEY UPDATE hits = hits + 1";
 
+            if($lyrics){
                 if (mysqli_query($conn, $addToSql)) {
                     $wordsCounter++;
                     echo $wordsCounter.") '".$word."' New record created successfully<br>";
                 } else {
                     echo "Error: " . $addToSql . "<br>" . mysqli_error($conn);
                 }
+            }
 
+            if( strcmp($word,'lyrics')==0 ) $lyrics = true;
             if(!array_key_exists($word, $invertedIndex)) $invertedIndex[$word] = [];
             if(!in_array($filename, $invertedIndex[$word], true)) $invertedIndex[$word][] = $filename;
         }
 
-        list($songAuthor, $songName, $songDate, $songSummary, $songPic, $songLyrics) = explode(";", $data, 6);
-
+        //list($songAuthor,$songName,$songDate,$songSummary,$songPic,$songLyrics)=explode(';',$data,6);
+        $new_arr = array_map('trim', explode(';', $data));
 
         echo("File Name: ".$filename."<br>");
-        echo("Author Name: ".$songAuthor."<br>");
-        echo("Song Name: ".$songName."<br>");
-        echo("Date: ".$songDate."<br>");
-        echo("Summary: ".$songSummary."<br>");
-        echo("Pic Path: ".$songPic."<br>");
-        echo("Full Lyrics: ".$songLyrics."<br><br>");
+        echo("Author Name: ".$new_arr[0]."<br>");
+        echo("Song Name: ".$new_arr[1]."<br>");
+        echo("Date: ".$new_arr[2]."<br>");
+        echo("Summary: ".$new_arr[3]."<br>");
+        echo("Pic Path: ".$new_arr[4]."<br>");
+        echo("Full Lyrics: ".$new_arr[5]."<br><br>");
 
+        $addToFile="INSERT INTO Files (fileName,songName,songAuthor,songDate,songSummary,songPic)
+              VALUES ('$filename','$new_arr[1]','$new_arr[0]','$new_arr[2]','$new_arr[3]','$new_arr[4]')";
 
-        $s_fileName = "fileName";
-        $s_songName = "songName";
-        $s_songAuthor = "songAuthor";
-        $s_songDate = "songDate";
-        $s_songSummary = "songSummary";
-        $s_songLyrics = "songLyrics";
-        $s_songPic = "songPic";
-
-
-         $addToFile="INSERT INTO Files (fileName, songName, songAuthor, songDate, songSummary, songPic)
-              VALUES ('$filename','$songName', '$songAuthor', '$songDate', '$songSummary' , '$songPic')";
-
-         if (mysqli_query($conn, $addToFile)) {
-                echo "File successfully<br>";
-         } else {
-                echo "Error: " . $addToFile . "<br>" . mysqli_error($conn);
-         }
+        if (mysqli_query($conn, $addToFile)) {
+                echo "<b>File successfully</b><br>";
+        } else {
+                echo "<br><b>Error: " . $addToFile . "</b><br>" . mysqli_error($conn)."<br>";
+        }
 
         $lyrics = false;
     }
@@ -139,7 +131,7 @@ function lookupWord($invertedIndex, $word)
     return array_key_exists($word, $invertedIndex) ? $invertedIndex[$word] : false;
 }
 
-$invertedIndex = buildInvertedIndex(['file1.txt']);
+$invertedIndex = buildInvertedIndex(['file1.txt','file2.txt','file3.txt']);
 
     // Get Search Input & find
     $word = $_GET['searchInput'];

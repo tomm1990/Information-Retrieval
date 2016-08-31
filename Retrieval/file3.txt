@@ -4,6 +4,7 @@ While My Guitar Gently Weeps;
 Summary3;
 images/z.png;
 
+lyrics:
 I look at you all see the love there that's sleeping
 While my guitar gently weeps
 I look at the floor and I see it needs sweeping
