@@ -72,6 +72,15 @@ nav ul li a:hover , a:focus , a:active{
     cursor: pointer;
 }
 
+#refreshBtn {
+    background: url(../images/Refresh.png);
+    background-size: 35px 30px;
+    margin-top: -3px;
+    height: 30px;
+    width: 35px;
+    float: right;
+}
+
 .files_container{
     width : 80%;
     margin: auto;
