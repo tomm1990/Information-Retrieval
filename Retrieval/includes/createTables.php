@@ -107,14 +107,15 @@
     }
 
 
-
-
-
-    function lookupWord($invertedIndex, $word)
-    {
-        return array_key_exists($word, $invertedIndex) ? $invertedIndex[$word] : false;
+    // create array of files Names from loacl folder
+    $filesNames=array();
+    $filesCounter=0;
+    foreach(glob('../data/*.*') as $filename){
+        $filesCounter++;
+        $filesNames[$filesCounter]=$filename;
     }
 
-    $invertedIndex = buildInvertedIndex(['../data/file1.txt','../data/file2.txt','../data/file3.txt']);
+    // send all files to inverted parser
+    $invertedIndex = buildInvertedIndex($filesNames);
 
 ?>

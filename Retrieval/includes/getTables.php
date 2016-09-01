@@ -1,23 +1,26 @@
 <?php
-    function buildInvertedIndex($filenames)
+
+    function getInvertedTable()
     {
-    // Init Sorting
-    $sort = "word";
-    $sort = "sum(hits)";
+        // Init Sorting
+        $sort = "word";
+        $sort = "sum(hits)";
 
-    // craate sql connection
-    include('connection.php');
+        // craate sql connection
+        include('connection.php');
 
-        $invertedIndex = [];
-        $filesCounter = 0;
+        // make query to sql hits table
         $mainTable = "SELECT id,fileNo,word,offset,SUM(hits)
         FROM Hits
         group BY word
         order by ".$sort." desc";
+
+        // send query to sql hits table
         $result = mysqli_query($connection,$mainTable) or die(mysqli_error());
 
         // Tommy don't worry tommorow i'll move this stylesheet to external file
 
+        // print first table row
         echo '<table style="margin: 40px; border-collapse: collapse; cellspacing="0" cellpadding="0";">';
 
             echo '<tr><a href="#">';
@@ -28,6 +31,7 @@
             echo '<td style="padding-left:20px; border:none ! important; font-size: 20px; #fff; color: #fff; height: 40px; width: 150px; background: url(../images/frow.png); "><span style="font-weight:bold;">Hits No</span></td>';
             echo '</a></tr>';
 
+        // print all sql data rows
         while($row = mysqli_fetch_array($result)){
             $sumHits = $row['SUM(hits)'];
             echo '<tr><a href="#">';
@@ -42,13 +46,12 @@
         }
         echo '</table>';
 
+        // close sql connection
         mysqli_free_result($result);
         mysqli_close($connection);
-
-        return $invertedIndex;
     }
 
-
-    $invertedIndex = buildInvertedIndex(['file1.txt', 'file2.txt', 'file3.txt']);
+    // start
+    getInvertedTable();
 
 ?>

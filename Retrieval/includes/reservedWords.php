@@ -1,72 +1,51 @@
 <?php
 
-function buildInvertedIndex($filenames)
-{
-    $invertedIndex = [];
-    $filesCounter = 0;
-
-    foreach($filenames as $filename)
+    function reservedWords()
     {
-        $sql = "CREATE TABLE MyGuests (
-        fileNo INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-        word VARCHAR(30) NOT NULL,
-        offset VARCHAR(30) NOT NULL
-        )";
+        // craate sql connection
+        include('connection.php');
 
-        $data = file_get_contents($filename);
-
-        if($data === false) die('Unable to read file: ' . $filename);
-        $filesCounter++;
-        preg_match_all('/(\w+)/', $data, $matches, PREG_SET_ORDER);
-
-        $wordsCounter = 0;
-
-        foreach($matches as $match)
+        // Search Reserved Words
+        foreach(['guitar', 'love', 'fast', 'car'] as $word)
         {
-            $word = strtolower($match[0]);
+            // make query to sql hits table
+            $mainTable = "SELECT id,fileNo,word,offset
+            FROM Hits
+            WHERE word='".$word."'";
 
-            $wordsCounter++;
+            // send query to sql hits table
+            $result = mysqli_query($connection,$mainTable) or die(mysqli_error());
 
-            $addToSql = "INSERT INTO MyGuests (fileNo, word, offset)
-            VALUES ($filesCounter, $word, $wordsCounter)";
+            // print first table row
+            echo '<table style="margin: 40px; border-collapse: collapse; cellspacing="0" cellpadding="0";">';
 
-            if(!array_key_exists($word, $invertedIndex)) $invertedIndex[$word] = [];
-            if(!in_array($filename, $invertedIndex[$word], true)) $invertedIndex[$word][] = $filename;
+                echo '<tr><a href="#">';
+                echo '<td style="padding-left:20px; border:none ! important; font-size: 20px; color: #fff; font-color: #fff; height: 40px; width: 90px; background: url(../images/frow.png); "><span style="font-weight:bold;">#</span></td>';
+                echo '<td style="padding-left:20px; border:none ! important; font-size: 20px; color: #fff; height: 40px; width: 170px; background: url(../images/frow.png); "><span style="font-weight:bold;">Word</span></td>';
+                echo '<td style="padding-left:20px; border:none ! important; font-size: 20px; color: #fff; font-color: #fff; height: 40px; width: 150px; background: url(../images/frow.png); "><span style="font-weight:bold;">File No</span></td>';
+                echo '<td style="padding-left:20px; border:none ! important; font-size: 20px; color: #fff; height: 40px; width: 150px; background: url(../images/frow.png); "><span style="font-weight:bold;">Word No</span></td>';
+                echo '</a></tr>';
+
+            // print all sql data rows
+            while($row = mysqli_fetch_array($result)){
+                echo '<tr><a href="#">';
+
+                echo '<td style="padding-left:15px; border: 1px solid; border:none ! important; font-size: 17px; color: #fff; font-color: #fff; height: 40px; width: 70px; background: url(../images/row.png); ">'.$row["id"].'</td>';
+                echo '<td style="padding-left:20px; border: 1px solid; border:none ! important; font-size: 17px; color: #fff; height: 40px; width: 100px; background: url(../images/row.png); ">'.$row["word"].'</td>';
+                echo '<td style="padding-left:20px; border: 1px solid; border:none ! important; font-size: 17px; color: #fff; font-color: #fff; height: 40px; width: 100px; background: url(../images/row.png); ">'.$row["fileNo"].'</td>';
+                echo '<td style="padding-left:20px; border: 1px solid; border:none ! important; font-size: 17px; color: #fff; height: 40px; width: 100px; background: url(../images/row.png); ">'.$row["offset"].'</td>';
+
+                echo '</a></tr>';
+            }
+            echo '</table>';
         }
+
+        // close sql connection
+        mysqli_free_result($result);
+        mysqli_close($connection);
     }
 
-    return $invertedIndex;
-}
-
-
-
-
-
-function lookupWord($invertedIndex, $word)
-{
-    return array_key_exists($word, $invertedIndex) ? $invertedIndex[$word] : false;
-}
-
-$invertedIndex = buildInvertedIndex(['../data/file1.txt', '../data/file2.txt', '../data/file3.txt']);
-
-// Search Reserved Words
-foreach(['guitar', 'love', 'beatles', 'hate'] as $word)
-{
-    $matches = lookupWord($invertedIndex, $word);
-
-    if($matches !== false)
-    {
-
-        echo "<img src='../images/v.png' style='width: 30px;'>";
-        echo "Found the word <span style='color: #00135D; font-weight: bold;'>\"$word\"</span> in the following files: <span style='color: #004621; font-weight: bold;'>" . implode(' , ', $matches) . "</span>\n";
-        echo "<br><br>";
-    }
-    else
-    {
-        echo "<img src='../images/x.png' style='width: 25px; margin-right: 10px;'>";
-        echo "Unable to find the word <span style='color: #00135D; font-weight: bold;'> \"$word\"</span> in the index\n";
-        echo "<br><br>";
-    }
-}
+    // start
+    reservedWords();
 
 ?>

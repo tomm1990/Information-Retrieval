@@ -1,24 +1,23 @@
 <?php
 
-    function buildInvertedIndex($filenames)
+    function searchWord()
     {
         // craate sql connection
         include('connection.php');
 
-        $invertedIndex = [];
-        $filesCounter = 0;
-        $lyrics = false;
-        $info = "";
-
         // Get Search Input & find
         $word = $_GET['searchInput'];
         echo $word;
-//        $matches = lookupWord($invertedIndex, $word);
+
+        // make query to sql hits table
         $mainTable = "SELECT id,fileNo,word,offset
         FROM Hits
         WHERE word='".$word."'";
-        //$mainTable = "select * from Hits where word=".$word."";
+
+        // send query to sql hits table
         $result = mysqli_query($connection,$mainTable) or die(mysqli_error());
+
+        // print first table row
         echo '<table style="margin: 40px; border-collapse: collapse; cellspacing="0" cellpadding="0";">';
 
             echo '<tr><a href="#">';
@@ -28,6 +27,7 @@
             echo '<td style="padding-left:20px; border:none ! important; font-size: 20px; color: #fff; height: 40px; width: 150px; background: url(../images/frow.png); "><span style="font-weight:bold;">Word No</span></td>';
             echo '</a></tr>';
 
+        // print all sql data rows
         while($row = mysqli_fetch_array($result)){
             echo '<tr><a href="#">';
 
@@ -40,18 +40,12 @@
         }
         echo '</table>';
 
+        // close sql connection
         mysqli_free_result($result);
         mysqli_close($connection);
-        return $invertedIndex;
     }
 
-
-
-    function lookupWord($invertedIndex, $word)
-    {
-        return array_key_exists($word, $invertedIndex) ? $invertedIndex[$word] : false;
-    }
-
-    $invertedIndex = buildInvertedIndex(['../data/file1.txt','../data/file2.txt','../data/file3.txt']);
+    // start
+    searchWord();
 
 ?>
