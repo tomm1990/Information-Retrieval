@@ -49,30 +49,37 @@
 
                     <div class="clear"></div>
 
-                    <form name="form" method="get" action="includes/search.php">
+                    <form name="form" method="get">
                         <label>Search:</label>
                         <input id="searchInput" type="text" ng-model="myValue" ng-change=search=1; name="searchInput" value="" placeholder="Enter a Word">
                         <input type="submit" value="Submit">
                     </form>
-                    <h1 ng-show="search">Search the Word - {{myValue}}</h1>
-                    <div class="clear"></div>
 
-
-                <script>
-                    var app = angular.module('myApp', []);
-                    app.controller('myCtrl', function($scope) {
-                        $scope.search = 0;
-                          $scope.myValue;
-
-                    });
-                </script>
-
+                    <div ng-show="search">
+                        <h1>Search the Word - {{myValue}}</h1>
+                        <iframe id="iframeSearch" name="myPHPScript" src="includes/search.php" height="100%" frameborder="0">
+                        </iframe>
+                    </div>
 
                     <div class="clear"></div>
 
-                    <h1 class="titlePage">Reserved Words</h1>
-                    <iframe id="iframeSearch" name="myPHPScript" src="includes/reservedWords.php" height="100%" frameborder="0">
-                    </iframe>
+
+
+                    <script>
+                        var app = angular.module('myApp', []);
+                        app.controller('myCtrl', function($scope) {
+                            $scope.search = 0;
+                            $scope.myValue;
+                        });
+                    </script>
+
+
+                    <div class="clear"></div>
+                    <div ng-hide="search">
+                        <h1 class="titlePage">Reserved Words</h1>
+                        <iframe id="iframeSearch" name="myPHPScript" src="includes/reservedWords.php" height="100%" frameborder="0">
+                        </iframe>
+                    </div>
 
             </div>
         </div>
