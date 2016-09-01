@@ -1,3 +1,4 @@
+/*
 body {
 	background : url(../images/background_img.jpg) ;
 	background-size : 100% 100% ;
@@ -6,11 +7,15 @@ body {
     font-family: "Levenim MT" , arial;
     color : aliceblue;
 }
+*/
 
-#wrapperIntro{
+body{
     background: url(../images/backgroundBlack.jpg);
     background-size : 100% 100% ;
 	background-attachment:fixed ;
+    height : 100%;
+    font-family: "Levenim MT" , arial;
+    color : aliceblue;
 }
 
 #wrapperIntro > header{
@@ -105,10 +110,10 @@ nav ul li a:hover , a:focus , a:active{
 
 a > img{
     position: absolute;
-    width : 30px;
-    height : 30px;
-    right : 54px;
-    top : 44px;
+    width : 100px;
+    height : 100px;
+    right : 10px;
+    top : 8px;
 
 }
 
@@ -138,10 +143,16 @@ header {
 	margin-left: 0px;
 }*/
 
+.titlePage {
+    margin-left: 50px;
+}
+
 label {
-	font-size: 32px;
+	font-size: 22px;
 	margin-right: 20px;
 	float: left;
+    font-family: "Levenim MT" , arial;
+    color : aliceblue;
 }
 
 input[type=text] {
@@ -160,9 +171,9 @@ td {
 }
 
 
-/*table {
-	margin-left: 10px;
-}*/
+table {
+	border-collapse: collapse;
+}
 
 
 iframe {
@@ -178,8 +189,9 @@ iframe {
 
 #iframeTables {
 	width: 990px;
-	height: 400px;
-	background-color: #fff;
+	height: 6500px;
+/*    background-color: #fff;*/
+	background-color: transparent;
 	margin-top: -20px;
 	border-radius: 10px;
 }

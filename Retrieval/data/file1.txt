@@ -2,7 +2,7 @@ THE BEATLES;
 A Hard Days Night;
 10/7/1964;
 Summary1;
-images/v.png;
+images/Night.jpg;
 
 lyrics:
 It's been a hard day's night, and I'd been working like a dog
