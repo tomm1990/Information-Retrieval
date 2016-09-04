@@ -39,7 +39,7 @@ body{
     font-size: 20px;
     width: 150px;
     margin-top: 0px;
-    margin-left: 222px;
+    margin-left: 60px;
     margin-right: 20px;
     float : left;
     font-family: "Levenim MT" , arial;
@@ -52,7 +52,7 @@ body{
     width: 500px;
     height: 35px;
     color: #000;
-    margin-left: 220px;
+    margin-left: 60px;
     border-radius: 10px;
     border: 3px solid cornflowerblue;
 }
@@ -63,13 +63,13 @@ body{
     width: 500px;
     height: 250px;
     color: #000;
-    margin-left: 220px;
+    margin-left: 60px;
     border-radius: 10px;
     border: 3px solid cornflowerblue;
 }
 
 #formSubmit{
-    margin-left: 220px;
+    margin-left: 60px;
     width: 500px;
     height: 50px;
     background-color: cornflowerblue;
@@ -82,9 +82,21 @@ body{
 
 #downloadify{
     margin-top: -30px;
-  margin-left: 420px;
+    margin-left: 260px;
 }
 
+
+.searchInput{
+    padding: 20px;
+    float: left;
+    width: 640px;
+    height: 35px;
+    color: #000;
+    margin-left: 220px;
+    border-radius: 10px;
+    border: 3px solid cornflowerblue;
+    font: 26px;
+}
 
 header nav{
     //position: absolute;
@@ -204,13 +216,25 @@ header {
 }*/
 
 .titlePage {
-    margin-left: 50px;
+    width: 100%;
+    text-align: center;
 }
 
 label {
-	font-size: 22px;
-	margin-right: 20px;
-	float: left;
+    width: 100%;
+    text-align: center;
+	font-size: 42px;
+    font-weight: 100;
+    font-family: "Levenim MT" , arial;
+    color : aliceblue;
+}
+
+.reservedTitle {
+    margin-top: 60px;
+    width: 100%;
+    text-align: center;
+	font-size: 42px;
+    font-weight: 100;
     font-family: "Levenim MT" , arial;
     color : aliceblue;
 }
@@ -236,25 +260,44 @@ table {
 	border-collapse: collapse;
 }
 
+#addNewForm {
+    border-radius: 10px;
+    background: rgba(219, 240, 255, 0.2);
+    padding: 10px;
+    width: 60%;
+    height: 920px;
+    margin: 0px auto;
+}
+
 
 iframe {
     float: left;
+    overflow:hidden;
 }
 
 #iframeSearch {
 	width: 990px;
 	height: 1500px;
 	float: left;
-	margin-top: -20px;
+	margin-top: 20px;
+    margin-left: 171px;
 }
 
 #iframeTables {
 	width: 990px;
-	height: 12000px;
-/*    background-color: #fff;*/
+	height: 12300px;
 	background-color: transparent;
-	margin-top: -20px;
+	margin-top: 20px;
 	border-radius: 10px;
+    margin-left: 100px;
+}
+
+#iframeReserved {
+	width: 990px;
+	height: 1500px;
+	float: left;
+	margin-top: -20px;
+    margin-left: 171px;
 }
 
 .clear {

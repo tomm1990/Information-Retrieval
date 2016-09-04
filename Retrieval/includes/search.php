@@ -7,7 +7,8 @@
 
         // Get Search Input & find
         $word = $_GET['searchInput'];
-        echo $word;
+
+        $counter = 0;
 
         // make query to sql hits table
         $mainTable = "SELECT id,fileNo,word,offset
@@ -16,6 +17,9 @@
 
         // send query to sql hits table
         $result = mysqli_query($connection,$mainTable) or die(mysqli_error());
+        $num_rows = mysqli_num_rows($result);
+
+        echo "<h2 style='font-size: 25px; margin-left: 276px; font-weight: 100; color: #fff; margin-top: 30px;'>".$num_rows." Results Found</h2>";
 
         // print first table row
         echo '<table style="margin: 40px; border-collapse: collapse; cellspacing="0" cellpadding="0";">';
@@ -39,7 +43,6 @@
             echo '</a></tr>';
         }
         echo '</table>';
-
         // close sql connection
         mysqli_free_result($result);
         mysqli_close($connection);
