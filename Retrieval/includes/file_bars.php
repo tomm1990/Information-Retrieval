@@ -15,7 +15,7 @@
 
     // print all sql data rows
     while( $row = mysqli_fetch_assoc($result) ){
-        echo "<a href='#' class='list-group-item active'>";
+        echo '<a href="http://localhost/RetrievalGit/Information-Retrieval/Retrieval/lyricsPage.html/'.$row["fileName"].'" class="list-group-item active">';
         echo '<h4 class="list-group-item-heading">'.$row["fileID"]." // ".$row["fileName"].'</h4>';
         echo '<p class="list-group-item-text">'.$row["songAuthor"].' - '.$row["songName"].'</p>';
         echo '<p class="list-group-item-text">'.$row["songDate"].'</p>';
