@@ -76,7 +76,7 @@
                             VALUES ('$filesCounter', '$word', '$wordsCounter', 1)
                             ON DUPLICATE KEY UPDATE hits = hits + 1";
 
-                if($lyrics){
+                if($lyrics && strcmp($word , "s")!=0 && strcmp($word , "t")!=0 && strcmp($word , "m")!=0&& strcmp($word , "d")!=0){
                     if (mysqli_query($connection, $addToSql)) {
                         $wordsCounter++;
                         //echo $wordsCounter.") '".$word."' New record created successfully<br>";
