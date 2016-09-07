@@ -49,10 +49,10 @@
             $TotalHits = $row['TotalHits'];
             echo '<tr>';
 
-            echo '<td style="padding-left:15px; border: 1px solid; border:none ! important; font-size: 17px; color: #fff; font-color: #fff; height: 40px; width: 70px; background: url(../images/row.png); "><a href="javascript:alert('.$ID.')">'.$ID.'</a></td>';
-            echo '<td style="padding-left:20px; border: 1px solid; border:none ! important; font-size: 17px; color: #fff; height: 40px; width: 100px; background: url(../images/row.png); "><a href="javascript:alert()">'.$KeyWord.'</a></td>';
-            echo '<td style="padding-left:20px; border: 1px solid; border:none ! important; font-size: 17px; color: #fff; font-color: #fff; height: 40px; width: 100px; background: url(../images/row.png); "><a href="javascript:alert('.$FromFiles.')">'.$FromFiles.'</a></td>';
-            echo '<td style="padding-left:20px; border: 1px solid; border:none ! important; font-size: 17px; color: #fff; height: 40px; width: 100px; background: url(../images/row.png); "><a href="javascript:alert('.$TotalHits.')">'.$TotalHits.'</a></td>';
+            echo '<td style="padding-left:15px; border: 1px solid; border:none ! important; font-size: 17px; color: #fff; font-color: #fff; height: 40px; width: 70px; background: url(../images/row.png); "><a href="javascript:alert('.$ID.')" style="text-decoration: none; color: #fff;">'.$ID.'</a></td>';
+            echo '<td style="padding-left:20px; border: 1px solid; border:none ! important; font-size: 17px; color: #fff; height: 40px; width: 100px; background: url(../images/row.png); "><a href="javascript:alert()" style="text-decoration: none; color: #fff;">'.$KeyWord.'</a></td>';
+            echo '<td style="padding-left:20px; border: 1px solid; border:none ! important; font-size: 17px; color: #fff; font-color: #fff; height: 40px; width: 100px; background: url(../images/row.png); "><a href="javascript:alert('.$FromFiles.')" style="text-decoration: none; color: #fff;">'.$FromFiles.'</a></td>';
+            echo '<td style="padding-left:20px; border: 1px solid; border:none ! important; font-size: 17px; color: #fff; height: 40px; width: 100px; background: url(../images/row.png); "><a href="javascript:alert('.$TotalHits.')" style="text-decoration: none; color: #fff;">'.$TotalHits.'</a></td>';
             //echo '<td style="padding-left:20px; border: 1px solid; border:none ! important; font-size: 17px; #fff; color: #fff; height: 40px; width: 100px; background: url(../images/row.png); ">'.$sumHits.'</td>';
 
             echo '</tr>';
