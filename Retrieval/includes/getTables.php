@@ -32,7 +32,7 @@
         // print first table row
         echo '<table style="margin-left: 40px; border-collapse: collapse; cellspacing="0" cellpadding="0";">';
 
-            echo '<tr><a href="#">';
+            echo '<tr>';
             echo '<td style="padding-left:20px; border:none ! important; font-size: 20px; color: #fff; font-color: #fff; height: 40px; width: 90px; background: url(../images/frow.png); "><span style="font-weight:bold;">#</span></td>';
             echo '<td style="padding-left:20px; border:none ! important; font-size: 20px; color: #fff; height: 40px; width: 170px; background: url(../images/frow.png); "><span style="font-weight:bold;">KeyWord</span></td>';
             //echo '<td style="padding-left:20px; border:none ! important; font-size: 20px; color: #fff; font-color: #fff; height: 40px; width: 150px; background: url(../images/frow.png); "><span style="font-weight:bold;">File No</span></td>';
@@ -47,15 +47,15 @@
             $KeyWord = $row['Keyword'];
             $FromFiles = $row['FromFiles'];
             $TotalHits = $row['TotalHits'];
-            echo '<tr><a href="#">';
+            echo '<tr>';
 
-            echo '<td style="padding-left:15px; border: 1px solid; border:none ! important; font-size: 17px; color: #fff; font-color: #fff; height: 40px; width: 70px; background: url(../images/row.png); ">'.$ID.'</td>';
-            echo '<td style="padding-left:20px; border: 1px solid; border:none ! important; font-size: 17px; color: #fff; height: 40px; width: 100px; background: url(../images/row.png); ">'.$KeyWord.'</td>';
-            echo '<td style="padding-left:20px; border: 1px solid; border:none ! important; font-size: 17px; color: #fff; font-color: #fff; height: 40px; width: 100px; background: url(../images/row.png); ">'.$FromFiles.'</td>';
-            echo '<td style="padding-left:20px; border: 1px solid; border:none ! important; font-size: 17px; color: #fff; height: 40px; width: 100px; background: url(../images/row.png); ">'.$TotalHits.'</td>';
+            echo '<td style="padding-left:15px; border: 1px solid; border:none ! important; font-size: 17px; color: #fff; font-color: #fff; height: 40px; width: 70px; background: url(../images/row.png); "><a href="javascript:alert('.$ID.')">'.$ID.'</a></td>';
+            echo '<td style="padding-left:20px; border: 1px solid; border:none ! important; font-size: 17px; color: #fff; height: 40px; width: 100px; background: url(../images/row.png); "><a href="javascript:alert()">'.$KeyWord.'</a></td>';
+            echo '<td style="padding-left:20px; border: 1px solid; border:none ! important; font-size: 17px; color: #fff; font-color: #fff; height: 40px; width: 100px; background: url(../images/row.png); "><a href="javascript:alert('.$FromFiles.')">'.$FromFiles.'</a></td>';
+            echo '<td style="padding-left:20px; border: 1px solid; border:none ! important; font-size: 17px; color: #fff; height: 40px; width: 100px; background: url(../images/row.png); "><a href="javascript:alert('.$TotalHits.')">'.$TotalHits.'</a></td>';
             //echo '<td style="padding-left:20px; border: 1px solid; border:none ! important; font-size: 17px; #fff; color: #fff; height: 40px; width: 100px; background: url(../images/row.png); ">'.$sumHits.'</td>';
 
-            echo '</a></tr>';
+            echo '</tr>';
         }
         echo '</table>';
 
