@@ -317,6 +317,50 @@ iframe {
     margin: 0px auto;
 }
 
+#id_container{
+    margin: auto;
+    width : 70%;
+    margin-top: -7vh;
+    display: block;
+}
+
+#id_container > h2{
+    position: absolute;
+    left: 40%;
+    top : 15%;
+}
+
+#teamPlayer{
+    margin: 10%;
+    float: left;
+    top : 40%;
+    width : 30%;
+    color : aliceblue;
+}
+
+#teamPlayer > h1{
+    font-size: 2vw;
+    text-align: center;
+}
+
+#teamPlayer > h2{
+    //width : 100%;
+    //float: left;
+    margin-left: 25%;
+    font-size : 1.3vw;
+}
+
+#teamPlayer > hr{
+
+}
+
+.story{
+    margin : 7%;
+    font-size : 1.5vw;
+}
+
+
+
 .clear {
 	clear: both;
 }
