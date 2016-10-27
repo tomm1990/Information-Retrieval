@@ -31,6 +31,8 @@
         <script type="text/javascript" src="js/swfobject.js"></script>
 		<script type="text/javascript" src="js/downloadify.min.js"></script>
 
+        <script type="text/javascript" src="includes/upload.js"></script>
+
 
     </head>
 
@@ -48,11 +50,19 @@
                 </ul></nav>
             </header>
             <div class="files_container">
+
+                <div class="clear"></div><br>
+                <h2>Add New File</h2>
+                <input type='file' id="openFile" accept='text/plain' onchange='javascript:openFile(event)'>
+                <div class="clear"></div><br>
                 <div id="addNewForm">
                     <form>
                         <br><br>
                         <label>Add New Lyrics</label>
-                        <div class="clear"></div>
+                        <div class="clear"></div><br>
+                        <h2>Add New File</h2>
+                        <input type='file' id="openFile" accept='text/plain' onchange='javascriptopenFile(event)' onclick=''>
+                        <div class="clear"></div><br>
                         <h2>File Name</h2>
                         <input type="text" id="filename" class="infoInput" value="file5.txt">
                         <div class="clear"></div><br>
@@ -101,6 +111,27 @@
                         append: false
                     });
                 </script>
+
+
+	<?php
+
+	// Open the text file
+	$f = fopen("textfile.txt", "w");
+
+	// Write text line
+	fwrite($f, "PHP is fun!");
+
+	// Close the text file
+	fclose($f);
+
+	// Open file for reading, and read the line
+	$f = fopen("textfile.txt", "r");
+	echo fgets($f);
+
+	fclose($f);
+
+	?>
+
 
 
             </div>

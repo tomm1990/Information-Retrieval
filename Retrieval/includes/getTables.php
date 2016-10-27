@@ -34,7 +34,7 @@
         // Tommy don't worry tommorow i'll move this stylesheet to external file
 
         // print first table row
-        echo '<table style="margin: 0px auto; border-collapse: collapse; cellspacing="0" cellpadding="0";">';
+        echo '<table style="font-family: Levenim MT , arial; margin: 0px auto; border-collapse: collapse; cellspacing="0" cellpadding="0";">';
 
             echo '<tr>';
             echo '<td style="padding-left:20px; border:none ! important; font-size: 20px; color: #fff; font-color: #fff; height: 40px; width: 90px; background: url(../images/frow.png); "><span style="font-weight:bold;">#</span></td>';
