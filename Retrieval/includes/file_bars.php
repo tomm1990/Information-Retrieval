@@ -26,15 +26,16 @@
     echo '<script type="text/javascript">
         function showLyrics(value) {
             path =  "../data/file"+value+".txt";
-            var iframe = document.createElement("iframe");
-            iframe.id = "iframeSearch";
-            iframe.frameBorder = "0";
-            iframe.height = "100%";
-            iframe.width = "100%";
-            var html = "includes/getLyrics.php?file="+path+"";
-            iframe.src = encodeURI(html);
-            console.log("iframe: "+iframe.src);
-            document.body.appendChild(iframe); window.open("http://localhost:8080//Retrieval/Retrieval/includes/getLyrics.php?file="+path+"", "", "width=700,height=800");
+//            var iframe = document.createElement("iframe");
+//            iframe.id = "iframeSearch";
+//            iframe.frameBorder = "0";
+//            iframe.height = "100%";
+//            iframe.width = "100%";
+//            var html = "includes/getLyrics.php?file="+path+"";
+//            iframe.src = encodeURI(html);
+//            console.log("iframe: "+iframe.src);
+//            document.body.appendChild(iframe);
+              window.open("http://localhost:8080//Retrieval/Retrieval/includes/getLyrics.php?file="+path+"", "", "width=700,height=800");
         }
     </script>';
 
