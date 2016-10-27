@@ -6,7 +6,10 @@
         include('connection.php');
 
         // Get Search Input & find
-        $word = $_GET['searchInput'];
+        if(isset($_GET['searchInput']))
+            $word = $_GET['searchInput'];
+
+        else return;
 
         $counter = 0;
 
@@ -19,10 +22,11 @@
         $result = mysqli_query($connection,$mainTable) or die(mysqli_error());
         $num_rows = mysqli_num_rows($result);
 
-        echo "<h2 style='font-size: 25px; margin-left: 276px; font-weight: 100; color: #fff; margin-top: 30px;'>".$num_rows." Results Found</h2>";
+        echo "<h2 style='font-family: Levenim MT , arial;
+    color : aliceblue; font-size: 25px; margin-left: 400px; font-weight: 300; margin-top: 30px; margin-bottom: 20px;'>".$num_rows." Results Found</h2>";
 
         // print first table row
-        echo '<table style="margin: 40px; border-collapse: collapse; cellspacing="0" cellpadding="0";">';
+        echo '<table style="margin: 0px auto; border-collapse: collapse; cellspacing="0" cellpadding="0";">';
 
             echo '<tr><a href="#">';
             echo '<td style="padding-left:20px; border:none ! important; font-size: 20px; color: #fff; font-color: #fff; height: 40px; width: 90px; background: url(../images/frow.png); "><span style="font-weight:bold;">#</span></td>';

@@ -89,22 +89,19 @@ body{
 
 .searchInput{
     padding: 20px;
-    float: left;
     width: 640px;
     height: 35px;
     color: #000;
-    margin-left: 220px;
+    margin-left: 170px;
     border-radius: 10px;
     border: 3px solid cornflowerblue;
     font: 26px;
 }
 
 header nav{
-    //position: absolute;
     margin-left : 5%;
     float : left;
     display: inline;
-    //width : 70%;
     height : 45%;
     bottom: 2px;
 }
@@ -146,20 +143,47 @@ nav ul li a:hover , a:focus , a:active{
 }
 
 .files_container{
-    width : 80%;
-    margin: auto;
+    width : 75%;
+    margin: 0px auto;
     margin-top: 5%;
+    /*  responsive  */
+}
 
+#sortingBox {
+    margin-left : 17%;
+    margin-top: 10px;
+    float: left;
+}
+
+#sortingBox > h4 {
+    float: left;
+    margin-right: 7px;
+    margin-left: 7px;
+    font-size: 15px;
+}
+
+#sortingBox > button {
+    float: left;
+    margin-top: 5px;
+    font-size: 15px;
+    text-decoration: none;
+    color : aliceblue;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+
+#sortingBox > button:hover {
+    text-decoration: none;
+    color: cornflowerblue;
 }
 
 .files_container > nav{
     float : left;
-
 }
 
 .files_container > nav > .btn-group-vertical{
-    //margin-right : 13%;
-    //float : left;
+    margin-right : 13%;
+    float : left;
 }
 
 .files_container > nav > .btn-group-vertical > button{
@@ -262,8 +286,8 @@ table {
     border-radius: 10px;
     background: rgba(219, 240, 255, 0.2);
     padding: 10px;
-    width: 60%;
-    height: 920px;
+    width: 65%;
+    height: 850px;
     margin: 0px auto;
 }
 
@@ -276,28 +300,32 @@ iframe {
 #iframeSearch {
 	width: 990px;
 	height: 1500px;
-	float: left;
-	margin-top: 20px;
-    margin-left: 171px;
+	margin-top: 30px;
 }
 
 #iframeTables {
 	width: 990px;
 	height: 12300px;
 	background-color: transparent;
-	margin-top: 20px;
 	border-radius: 10px;
-    margin-left: 180px;
+    margin: 0px auto;
 }
 
 #iframeReserved {
 	width: 990px;
 	height: 1500px;
-	float: left;
-	margin-top: -20px;
-    margin-left: 171px;
+    margin: 0px auto;
 }
 
 .clear {
 	clear: both;
+}
+
+@media only screen and (min-width: 1900px) {
+    .files_container{
+        width : 50%;
+        margin: 0px auto;
+        margin-top: 5%;
+        /*  responsive  */
+    }
 }

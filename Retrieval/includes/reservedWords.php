@@ -17,7 +17,7 @@
             $result = mysqli_query($connection,$mainTable) or die(mysqli_error());
 
             // print first table row
-            echo '<table style="margin: 40px; border-collapse: collapse; cellspacing="0" cellpadding="0";">';
+            echo '<table style="margin: 0px auto; margin-bottom: 40px; border-collapse: collapse; cellspacing="0" cellpadding="0";">';
 
                 echo '<tr><a href="#">';
                 echo '<td style="padding-left:20px; border:none ! important; font-size: 20px; color: #fff; font-color: #fff; height: 40px; width: 90px; background: url(../images/frow.png); "><span style="font-weight:bold;">#</span></td>';
