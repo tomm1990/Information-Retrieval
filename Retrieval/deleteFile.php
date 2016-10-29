@@ -25,9 +25,9 @@
 
     $checkTest = getcwd()."/data/";
 
-    //$filename = $_GET['filename'];
+    $filename = $_GET['filename'];
 
-    $deletedfile = getcwd()."/data/file1.txt";
+    $deletedfile = getcwd()."/data/file".$filename.".txt";
 
     unlink($deletedfile);
 

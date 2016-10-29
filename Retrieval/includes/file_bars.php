@@ -15,12 +15,16 @@
 
     // print all sql data rows
     while( $row = mysqli_fetch_assoc($result) ){
-        echo '<a href="javascript:showLyrics('.$row["fileID"].')" class="list-group-item active">';
+        $fileName = explode("e", $row["fileName"]);
+        $fileName2 = explode(".", $fileName[1]);
+
+        echo '<a href="javascript:showLyrics('.$fileName2[0].')" class="list-group-item active">';
         echo '<h4 class="list-group-item-heading">'.$row["fileID"]." // ".$row["fileName"].'</h4>';
         echo '<p class="list-group-item-text">'.$row["songAuthor"].' - '.$row["songName"].'</p>';
         echo '<p class="list-group-item-text">'.$row["songDate"].'</p>';
         echo '<p class="list-group-item-text">'.$row["songSummary"].'</p>';
-        echo '<img src="./images/x.png" class="deleteBtn" onclick="http://localhost:8080/Retrieval/Retrieval/deleteFile.php";>';
+
+        echo '<img src="./images/x.png" class="deleteBtn" onclick="deleteFile('.$fileName2[0].');";>';
         echo '<img src='.$row["songPic"].'></a>';
 
     }
@@ -38,6 +42,17 @@
 //            console.log("iframe: "+iframe.src);
 //            document.body.appendChild(iframe);
               window.open("http://localhost:8080//Retrieval/Retrieval/includes/getLyrics.php?file="+path+"", "", "width=700,height=800");
+        }
+
+        function deleteFile(value){
+                $.post("http://localhost:8080/Retrieval/Retrieval/deleteFile.php?filename="+value+"");
+//                window.open("http://localhost:8080/Retrieval/Retrieval/intro.html","_self");
+                window.location.reload(true);
+
+                $.post("http://localhost:8080/Retrieval/Retrieval/includes/createTables.php");
+                window.open("http://localhost:8080/Retrieval/Retrieval/intro.html","_self");
+                location = "http://localhost:8080/Retrieval/Retrieval/intro.html";
+                window.location.reload(true);
         }
     </script>';
 
