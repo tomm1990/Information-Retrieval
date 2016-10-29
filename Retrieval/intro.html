@@ -31,6 +31,35 @@
         <link rel="stylesheet"  href="includes/style.css" >
         <script src="includes/scripts.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <script>
+            function refreshPage(){
+                $.post("http://localhost:8080/Retrieval/Retrieval/includes/createTables.php");
+                window.open("http://localhost:8080/Retrieval/Retrieval/intro.html","_self");
+                window.location.reload(true);
+            }
+
+            function showDelete(){
+                var list = document.getElementsByClassName("deleteBtn");
+                if(list[0].style.display == "none")
+                    for (i = 0; i < list.length; i++) {
+                        list[i].style.display = "block";
+                    }
+                else
+                    for (i = 0; i < list.length; i++) {
+                        list[i].style.display = "none";
+                    }
+            }
+
+            $(document).ready(function(){
+                var list = document.getElementsByClassName("deleteBtn");
+                for (i = 0; i < list.length; i++) {
+                    list[i].style.display = "none";
+                }
+
+            });
+        </script>
+
     </head>
 
     <body>
@@ -42,16 +71,16 @@
                      <li><a href="index.html">Index</a></li>
                      <li><a href="search.html">Search</a></li>
                      <li><a href="#">temp1</a></li>
-                     <li><a href="#">About</a></li>
-                     <li><a id="refreshBtn" href="includes/createTables.php"></a></li>
+                     <li><a href="about.html">About</a></li>
+                     <li><a href="javascript:refreshPage();" id="refreshBtn"></a></li>
                 </ul></nav>
             </header>
             <div class="files_container">
                 <nav>
                     <div class="btn-group-vertical" role="group" aria-label="...">
                         <button type="button" class="btn btn-default" onclick="location.href='addNewFile.html'">Add</button>
-                        <button type="button" class="btn btn-default">Remove</button>
-                        <button type="button" class="btn btn-default">temp1</button>
+                        <button type="button" class="btn btn-default" onclick="showDelete();">Remove</button>
+<!--                        <button type="button" class="btn btn-default">temp1</button>-->
                     </div>
 
                 </nav>

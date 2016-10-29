@@ -6,7 +6,7 @@
         include('connection.php');
 
         // Search Reserved Words
-        foreach(['guitar', 'love', 'fast', 'car'] as $word)
+        foreach(['things', 'out', 'life', 'with'] as $word)
         {
             // make query to sql hits table
             $mainTable = "SELECT id,fileNo,word,offset

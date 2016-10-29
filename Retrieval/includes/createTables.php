@@ -33,7 +33,7 @@
         } else {
             $deleteSql = "DROP TABLE Files";
             if (mysqli_query($connection, $deleteSql)) {
-                echo "Old Files Table Deleted Successfully<br><br>";
+//                echo "Old Files Table Deleted Successfully<br><br>";
                 mysqli_query($connection, $sqlFiles);
                 } else {
                     echo "Error: " . $deleteSql . "<br>" . mysqli_error($conn);
@@ -46,7 +46,7 @@
         } else {
             $deleteSql = "DROP TABLE Hits";
             if (mysqli_query($connection, $deleteSql)) {
-                echo "Old Hits Table Deleted Successfully<br><br>";
+//                echo "Old Hits Table Deleted Successfully<br><br>";
                 mysqli_query($connection, $sqlHits);
                 } else {
                     echo "Error: " . $deleteSql . "<br>" . mysqli_error($conn);

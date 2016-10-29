@@ -31,6 +31,14 @@
         <link rel="stylesheet"  href="includes/style.css" >
         <script src="includes/scripts.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+        <script>
+            function refreshPage(){
+                $.post("http://localhost:8080/Retrieval/Retrieval/includes/createTables.php");
+                window.open("http://localhost:8080/Retrieval/Retrieval/intro.html","_self");
+                window.location.reload(true);
+            }
+        </script>
     </head>
 
     <body>
@@ -42,8 +50,8 @@
                      <li><a href="index.html">Index</a></li>
                      <li><a href="search.html">Search</a></li>
                      <li><a href="#">temp1</a></li>
-                     <li><a href="#">About</a></li>
-                     <li><a id="refreshBtn" href="includes/createTables.php"></a></li>
+                     <li><a href="about.html">About</a></li>
+                     <li><a href="javascript:refreshPage();" id="refreshBtn"></a></li>
                 </ul></nav>
             </header>
 

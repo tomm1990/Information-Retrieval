@@ -1,7 +1,7 @@
 The Beatles;
 Strawberry Fields Forever;
-10/12/1967;
-Summary2;
+1967;
+Summary;
 images/Strawberry.jpg;
 
 lyrics:

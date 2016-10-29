@@ -1,8 +1,8 @@
 Coldplay;
 Trouble;
-10/12/2001;
-Summary5;
-images/newsong.jpg;
+2000;
+Summary;
+images/coldplay.jpg;
 
 lyrics:
 Oh, no, I see

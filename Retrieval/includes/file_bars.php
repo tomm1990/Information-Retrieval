@@ -20,7 +20,9 @@
         echo '<p class="list-group-item-text">'.$row["songAuthor"].' - '.$row["songName"].'</p>';
         echo '<p class="list-group-item-text">'.$row["songDate"].'</p>';
         echo '<p class="list-group-item-text">'.$row["songSummary"].'</p>';
+        echo '<img src="./images/x.png" class="deleteBtn" onclick="http://localhost:8080/Retrieval/Retrieval/deleteFile.php";>';
         echo '<img src='.$row["songPic"].'></a>';
+
     }
 
     echo '<script type="text/javascript">
@@ -38,6 +40,7 @@
               window.open("http://localhost:8080//Retrieval/Retrieval/includes/getLyrics.php?file="+path+"", "", "width=700,height=800");
         }
     </script>';
+
 
 
     // close sql connection

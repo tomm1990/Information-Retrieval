@@ -31,9 +31,44 @@
         <script type="text/javascript" src="js/swfobject.js"></script>
 		<script type="text/javascript" src="js/downloadify.min.js"></script>
 
-        <script type="text/javascript" src="includes/upload.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+                <script>
 
 
+                    var openFile = function(event) {
+                    var input = event.target;
+                    console.log("path: "+input.value);
+                    var path = (input.value).split("\\");
+                    console.log("filename: "+path[2]);
+
+                $(document).ready(function(){
+                    $("button").click(function(){
+                        //alert("Data: ");
+                        $.get("test.php?filename="+path[2]+"");
+                    });
+                });
+
+
+                $(document).ready(function(){
+                    $("#uploadBtn").click(function(){
+                        alert("System Refreshed Successfully");
+                        $.post("http://localhost:8080/Retrieval/Retrieval/includes/createTables.php");
+                        window.open("http://localhost:8080/Retrieval/Retrieval/intro.html","_self");
+                        location = "http://localhost:8080/Retrieval/Retrieval/intro.html";
+                        window.location.reload(true);
+                    });
+                });
+
+                }
+
+                function refreshPage(){
+                    $.post("http://localhost:8080/Retrieval/Retrieval/includes/createTables.php");
+                    window.open("http://localhost:8080/Retrieval/Retrieval/intro.html","_self");
+                    window.location.reload(true);
+                }
+
+                </script>
     </head>
 
     <body>
@@ -45,24 +80,27 @@
                      <li><a href="index.html">Index</a></li>
                      <li><a href="search.html">Search</a></li>
                      <li><a href="#">temp1</a></li>
-                     <li><a href="#">About</a></li>
-                     <li><a id="refreshBtn" href="includes/createTables.php"></a></li>
+                     <li><a href="about.html">About</a></li>
+                     <li><a href="javascript:refreshPage();" id="refreshBtn"></a></li>
                 </ul></nav>
             </header>
             <div class="files_container">
 
-                <div class="clear"></div><br>
-                <h2>Add New File</h2>
-                <input type='file' id="openFile" accept='text/plain' onchange='javascript:openFile(event)'>
-                <div class="clear"></div><br>
-                <div id="addNewForm">
+
+                <div id="uploadNewFile">
+                    <div class="clear"></div><br>
+                    <label>Upload New Lyrics</label>
+                    <h2>Add New File</h2>
+                    <input type='file' id="openFile" accept='text/plain' onchange='javascript:openFile(event)'>
+                    <button id="uploadBtn">Upload</button>
+                    <div class="clear"></div><br>
+                </div>
+
+                    <div id="addNewForm">
                     <form>
                         <br><br>
                         <label>Add New Lyrics</label>
-                        <div class="clear"></div><br>
-                        <h2>Add New File</h2>
-                        <input type='file' id="openFile" accept='text/plain' onchange='javascriptopenFile(event)' onclick=''>
-                        <div class="clear"></div><br>
+                        <div class="clear"></div>
                         <h2>File Name</h2>
                         <input type="text" id="filename" class="infoInput" value="file5.txt">
                         <div class="clear"></div><br>
@@ -111,27 +149,6 @@
                         append: false
                     });
                 </script>
-
-
-	<?php
-
-	// Open the text file
-	$f = fopen("textfile.txt", "w");
-
-	// Write text line
-	fwrite($f, "PHP is fun!");
-
-	// Close the text file
-	fclose($f);
-
-	// Open file for reading, and read the line
-	$f = fopen("textfile.txt", "r");
-	echo fgets($f);
-
-	fclose($f);
-
-	?>
-
 
 
             </div>
