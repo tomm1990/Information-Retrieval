@@ -1,14 +1,7 @@
-/*
-body {
-	background : url(../images/background_img.jpg) ;
-	background-size : 100% 100% ;
-	background-attachment:fixed ;
-	height : 100%;
-    font-family: "Levenim MT" , arial;
-    color : aliceblue;
+@font-face {
+    font-family: Levenim MT;
+    src: url(4aedb84cb7e5aa0e9c807efdb0cd947f.woff);
 }
-*/
-
 
 body{
     background: url(../images/backgroundBlack.jpg);
