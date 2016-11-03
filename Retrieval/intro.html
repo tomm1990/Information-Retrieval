@@ -41,6 +41,7 @@
 
             function showDelete(){
                 var list = document.getElementsByClassName("deleteBtn");
+
                 if(list[0].style.display == "none")
                     for (i = 0; i < list.length; i++) {
                         list[i].style.display = "block";
@@ -51,10 +52,11 @@
                     }
             }
 
+
             $(document).ready(function(){
                 var list = document.getElementsByClassName("deleteBtn");
                 for (i = 0; i < list.length; i++) {
-                    list[i].style.display = "none";
+                    list[i].style.display = "block";
                 }
 
             });

@@ -16,7 +16,8 @@
             songDate VARCHAR(10),
             songSummary VARCHAR(130),
             songLyrics VARCHAR(2000),
-            songPic VARCHAR(100))";
+            songPic VARCHAR(100)
+            )";
 
         // create sql hits table
         $sqlHits = "CREATE TABLE Hits (
@@ -24,7 +25,8 @@
             fileNo VARCHAR(30) NOT NULL,
             word VARCHAR(30) NOT NULL,
             offset INT(6) UNSIGNED NOT NULL,
-            hits INT NOT NULL
+            hits INT NOT NULL,
+            isStopList BOOLEAN
         )";
 
         // check for old files table & remove
@@ -62,30 +64,64 @@
 
         foreach($filenames as $filename)
         {
+
             $data = file_get_contents($filename);
             if($data === false) die('Unable to read file: ' . $filename);
             $filesCounter++;
-            preg_match_all('/(\w+)/', $data, $matches, PREG_SET_ORDER);
+            preg_match_all("/(\w+)'(\w+) | (\w+)/", $data, $matches, PREG_SET_ORDER);
 
             $wordsCounter = 0;
             foreach($matches as $match)
             {
                 $word = strtolower($match[0]);
-
-                $addToSql="INSERT INTO Hits (fileNo, word, offset, hits)
-                            VALUES ('$filesCounter', '$word', '$wordsCounter', 1)
+                $addToSql="INSERT INTO Hits (fileNo, word, offset, hits,isStopList)
+                            VALUES ('$filesCounter', '$word', '$wordsCounter', 1, FALSE)
+                            ON DUPLICATE KEY UPDATE hits = hits + 1";
+                $addToSql_StopList = "INSERT INTO Hits (fileNo, word, offset,                               hits,isStopList)
+                            VALUES ('$filesCounter', '$word', '$wordsCounter', 1, TRUE)
                             ON DUPLICATE KEY UPDATE hits = hits + 1";
 
-                if($lyrics && strcmp($word , "s")!=0 && strcmp($word , "t")!=0 && strcmp($word , "m")!=0&& strcmp($word , "d")!=0){
-                    if (mysqli_query($connection, $addToSql)) {
+                if($lyrics){
+                   if(  strcasecmp($word , 'i')==0 ){
+                       echo "good : ".$word."<br>";
+                       mysqli_query($connection, $addToSql);
+                       $wordsCounter++;
+                   }
+                    else{
+                        echo "bad : ".$word."<br>";
+                        mysqli_query($connection, $addToSql_StopList);
                         $wordsCounter++;
-                        //echo $wordsCounter.") '".$word."' New record created successfully<br>";
-                    } else {
-                        echo "Error: " . $addToSql . "<br>" . mysqli_error($connection);
                     }
                 }
 
-                if( strcmp($word,'lyrics')==0 ) $lyrics = true;
+//                if($lyrics
+//                   && strcmp($word , "the")!=0
+//                   && strcmp($word , "i")!=0
+//                   && strcmp($word , "I")!=0
+//                   && strcmp($word , "am")!=0
+//                   && strcmp($word , "is")!=0
+//                   && strcmp($word , "are")!=0
+//                    ){
+//                    mysqli_query($connection, $addToSql);
+//                    //if (mysqli_query($connection, $addToSql)) {
+//                    $wordsCounter++;
+//
+//                    //} else {
+//                    //    echo "Error: " . $addToSql . "<br>" . mysqli_error($connection);
+//                    //}
+//                }
+//                else if($lyrics
+//                   && strcmp($word , "the")==0
+//                   && strcmp($word , "i")==0
+//                   && strcmp($word , "I")==0
+//                   && strcmp($word , "am")==0
+//                   && strcmp($word , "is")==0
+//                   && strcmp($word , "are")==0){
+//                    mysqli_query($connection, $addToSql_StopList);
+//                    $wordsCounter++;
+//                }
+
+                if( strcmp($word,'lyrics')!=0 ) $lyrics = true;
                 if(!array_key_exists($word, $invertedIndex)) $invertedIndex[$word] = [];
                 if(!in_array($filename, $invertedIndex[$word], true)) $invertedIndex[$word][] = $filename;
             }

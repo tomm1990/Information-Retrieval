@@ -30,7 +30,7 @@
     // creating new file
     $newfile = getcwd()."/data/file".$filesCounter.".txt";
 
-    if(!file_exists( $newfile )){
+    if( !file_exists( $newfile ) ){
         copy($path, $newfile);
         return;
     }
