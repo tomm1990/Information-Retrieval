@@ -82,7 +82,7 @@
                             ON DUPLICATE KEY UPDATE hits = hits + 1";
 
                 if($lyrics){
-                   if(  strcasecmp($word , 'i')==0 ){
+                   if(  strcmp($word , "back") != 0  ){
                        echo "good : ".$word."<br>";
                        mysqli_query($connection, $addToSql);
                        $wordsCounter++;
@@ -93,6 +93,7 @@
                         $wordsCounter++;
                     }
                 }
+
 
 //                if($lyrics
 //                   && strcmp($word , "the")!=0

@@ -31,8 +31,6 @@
         // send query to sql hits table
         $result = mysqli_query($connection,$mainTable) or die(mysqli_error());
 
-        // Tommy don't worry tommorow i'll move this stylesheet to external file
-
         // print first table row
         echo '<table style="font-family: Levenim MT , arial; margin: 0px auto; border-collapse: collapse; cellspacing="0" cellpadding="0";">';
 

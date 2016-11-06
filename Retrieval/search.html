@@ -25,7 +25,7 @@
         <script type="text/javascript" src="http://fast.fonts.net/jsapi/607782f1-d416-455d-b81a-01475efeabf4.js"></script>
 
         <link rel="stylesheet"  href="includes/style.css" >
-        <link rel="stylesheet" href="includes/style.php" media="screen">
+<!--        <link rel="stylesheet" href="includes/style.php" media="screen">-->
         <script src="includes/scripts.js"></script>
 
         <script>
@@ -71,10 +71,9 @@
                             iframe.id = "iframeSearch";
                             iframe.frameBorder = "0";
                             iframe.height = "100%";
-                            var html = "includes/search.php?searchInput="+value+"";
+                            var html = "includes/searchPostingFile.php?searchInput="+value+"";
                             iframe.src = encodeURI(html);
                             console.log("iframe: "+iframe.src);
-                            //document.getElementById('iframeSearch').contentWindow.location.reload(true);
                             document.getElementById("searchBox").appendChild(iframe);
                         }
                     </script>

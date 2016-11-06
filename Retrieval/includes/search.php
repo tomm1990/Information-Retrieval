@@ -1,5 +1,10 @@
 <?php
 
+    function checkIfValid($word){
+
+    }
+
+
     function searchWord()
     {
         // craate sql connection
@@ -8,18 +13,76 @@
         // Get Search Input & find
         if(isset($_GET['searchInput']))
             $word = $_GET['searchInput'];
-
         else return;
+
+        $rows = explode(" ", $word);
+        $numOfWords = count($rows);
+
+        $queryToEx = "SELECT id, fileNo, word, offset
+                        FROM Hits ";
+        $replace = " REPLACE(word, ' ', '') ";
+        $isStopList = 0;
+        $andStopList = " AND isStopList = ".$isStopList;
+
+        //for( $i = 0 ; $i < $numOfWords ; $i++){
+        //   echo "<Br><H2 style=color:white;>rows -> ".$rows[$i]."</h2>";
+        //}
+
+        if($numOfWords == 1){
+            // if the word is different from OR, AND, NOT
+            if( strcmp($rows[0],"OR")!=0
+                 && strcmp($rows[0],"AND")!=0
+                 && strcmp($rows[0],"NOT")!=0){
+                    $queryToEx .= " WHERE ".$replace.' ="'.$word.'"  '.$andStopList.' ';
+                    // debbuging
+                    echo "<Br><H2 style='color:white; font-size: 20px;'>".$queryToEx."</h2>";
+            }
+        } else if($numOfWords == 2){
+            // if $rows[0] == "NOT"
+            if (strcmp($rows[0],"NOT")==0){
+                //  "NOT" statement was found
+                $queryToEx .= " WHERE NOT ".$replace.' ="'.$rows[1].'"  '.$andStopList.' ';
+                // debbuging
+                echo "<Br><H2 style='color:white; font-size: 20px;'>".$queryToEx."</h2>";
+            } else{
+                echo "<Br><H2 style='color:white; font-size: 20px;'>Please provide another values</h2>";
+            }
+        } else if($numOfWords == 3){
+            if( strcmp($rows[1],"AND")==0 || strcmp($rows[1],"&&")==0 ){
+
+            } else if( strcmp($rows[1],"OR")==0 || strcmp($rows[1],"||")==0 || strcmp($rows[1],"|")==0 ){
+
+            } else {
+
+            }
+        }
+        //echo "<Br><H2 style=color:white;>".$queryToEx."</h2>";
+        if( strcmp($rows[0],"NOT")==0 || strcmp($rows[0],"!")==0){
+            // $rows[0] is NOT
+            //$queryToEx .= " Where NOT ".$replace.'  = "'.$rows[1].'" '.$andStopList.'';
+            //echo "<Br><H2 style=color:white;>NOT2 -> ".$queryToEx."</h2>";
+
+        } else if( strcmp($rows[1],"AND")==0 || strcmp($rows[1],"&&")==0 ){
+            //$queryToEx .= " Where ".$replace.' (word="'.$rows[0].'" AND ="'.$rows[2].'") '.$andStopList.'';
+            //echo "<Br><H2 style=color:white;>AND -> ".$queryToEx."</h2>";
+
+        } else if( strcmp($rows[1],"OR")==0 || strcmp($rows[1],"||")==0 || strcmp($rows[1],"|")==0){
+            //$queryToEx .= " Where ".$replace.' (word="'.$rows[0].'" OR ="'.$rows[2].'") '.$andStopList.'';
+            //echo "<Br><H2 style=color:white;>OR -> ".$queryToEx."</h2>";
+
+        } else {
+
+        }
 
         $counter = 0;
 
         // make query to sql hits table
-        $mainTable = "SELECT id,fileNo,word,offset
-        FROM Hits
-        WHERE word='".$word."'";
+        //$mainTable = "SELECT id,fileNo,word,offset
+        //FROM Hits
+        //WHERE word='".$word."'";
 
         // send query to sql hits table
-        $result = mysqli_query($connection,$mainTable) or die(mysqli_error());
+        $result = mysqli_query($connection,$queryToEx) or die("<h2 style='font-family: Levenim MT , arial; color : aliceblue;'>Error : ".mysqli_error($connection)."<br>".$queryToEx."</h2>" );
         $num_rows = mysqli_num_rows($result);
 
         echo "<h2 style='font-family: Levenim MT , arial;

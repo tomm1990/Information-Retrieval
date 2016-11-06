@@ -84,7 +84,8 @@
         WHERE word='".$word."'";
 
         // send query to sql hits table
-        $result = mysqli_query($connection,$mainTable) or die(mysqli_error());
+        $result = mysqli_query($connection,$mainTable) or die("<h2 style='font-family: Levenim MT , arial; color : aliceblue;'>Error : ".mysqli_error($connection)."<br>".$mainTable."</h2>");
+
         $num_rows = mysqli_num_rows($result);
 
         echo "<h2 style='font-family: Levenim MT , arial;
