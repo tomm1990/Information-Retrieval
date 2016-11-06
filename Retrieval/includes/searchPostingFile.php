@@ -98,7 +98,7 @@
                 function toFile(value, tosearch){
                     console.log(value+" and "+tosearch );
                     path =  "../data/file"+value+".txt";
-                    window.open("http://localhost:8080//Retrieval/Retrieval/includes/getLyrics.php?file="+path+"&word="+tosearch", "", "width=700,height=800");
+                    window.open("http://localhost:8080//Retrieval/Retrieval/includes/getLyrics.php?file=../data/file"+value+".txt"+"&word="+tosearch+", "", "width=700,height=800");
                 }
              </script>';
             {

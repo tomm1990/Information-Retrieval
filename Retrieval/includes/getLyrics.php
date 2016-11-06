@@ -6,6 +6,12 @@
         if(isset($_GET['file']))
             $fileName = $_GET['file'];
 
+        if(isset($_GET['word'])){
+            $tosearch = $_GET['word'];
+            // Mark the word
+            echo("".$tosearch."");
+        }
+
         $txt_file = file_get_contents(''.$fileName.'');
         $rows = explode("\n", $txt_file);
 
