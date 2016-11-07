@@ -23,7 +23,7 @@
             id as ID,
             word as Keyword,
             count(distinct(fileNo)) as FromFiles, count(offset) as TotalHits
-            from Hits
+            from Hits where isStopList = 0
             group BY Keyword
             order by ".$sort."";
             //order by ".$sort." desc";

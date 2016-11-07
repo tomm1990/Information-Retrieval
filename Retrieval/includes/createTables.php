@@ -75,61 +75,34 @@
             {
                 $word = strtolower($match[0]);
 
-                if($word != "you")
+                if(($word == " you")||
+                   ($word == " a")||
+                   ($word == " i")||
+                   ($word == " is")||
+                   ($word == " and")||
+                   ($word == " the")||
+                   ($word == " to")||
+                   ($word == " me")||
+                   ($word == " in")||
+                   ($word == " be")||
+                   ($word == " of")||
+                   ($word == " so")||
+                   ($word == " he")||
+                   ($word == " or")||
+                   ($word == " by")||
+                   ($word == " as")||
+                   ($word == " it"))
                     $isStopList = 1;
 
                 else $isStopList = 0;
 
-//                $addToSql="INSERT INTO Hits (fileNo, word, offset, hits,isStopList)
-//                            VALUES ('$filesCounter', '$word', '$wordsCounter', 1, FALSE)
-//                            ON DUPLICATE KEY UPDATE hits = hits + 1";
+                $addToSql = "INSERT INTO Hits (fileNo, word, offset,                               hits,isStopList)
+                    VALUES ('$filesCounter', '$word', '$wordsCounter', 1, '$isStopList')
+                    ON DUPLICATE KEY UPDATE hits = hits + 1";
 
-                $addToSql_StopList = "INSERT INTO Hits (fileNo, word, offset,                               hits,isStopList)
-                            VALUES ('$filesCounter', '$word', '$wordsCounter', 1, '$isStopList')
-                            ON DUPLICATE KEY UPDATE hits = hits + 1";
+                mysqli_query($connection, $addToSql);
+                $wordsCounter++;
 
-               // if($lyrics){
-//                   if(strcmp($word , 'you') == 0  ){
-//                       //echo "good : ".$word."<br>";
-//                       mysqli_query($connection, $addToSql);
-//                       $wordsCounter++;
-//                   }
-//                    else{
-                        //echo "bad : ".$word."<br>";
-
-                        mysqli_query($connection, $addToSql_StopList);
-                        $wordsCounter++;
-
-                //    }
-              //  }
-
-
-//                if($lyrics
-//                   && strcmp($word , "the")!=0
-//                   && strcmp($word , "i")!=0
-//                   && strcmp($word , "I")!=0
-//                   && strcmp($word , "am")!=0
-//                   && strcmp($word , "is")!=0
-//                   && strcmp($word , "are")!=0
-//                    ){
-//                    mysqli_query($connection, $addToSql);
-//                    //if (mysqli_query($connection, $addToSql)) {
-//                    $wordsCounter++;
-//
-//                    //} else {
-//                    //    echo "Error: " . $addToSql . "<br>" . mysqli_error($connection);
-//                    //}
-//                }
-//                else if($lyrics
-//                   && strcmp($word , "the")==0
-//                   && strcmp($word , "i")==0
-//                   && strcmp($word , "I")==0
-//                   && strcmp($word , "am")==0
-//                   && strcmp($word , "is")==0
-//                   && strcmp($word , "are")==0){
-//                    mysqli_query($connection, $addToSql_StopList);
-//                    $wordsCounter++;
-//                }
 
                 if( strcmp($word,'lyrics')!=0 ) $lyrics = true;
                 if(!array_key_exists($word, $invertedIndex)) $invertedIndex[$word] = [];

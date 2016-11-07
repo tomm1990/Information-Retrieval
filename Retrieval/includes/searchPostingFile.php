@@ -1,8 +1,19 @@
 <?php
     function getSearchPostingFile(){
         // Get Search Input & find
-        if(isset($_GET['searchInput']))
+        if(isset($_GET['searchInput'])){
             $word = $_GET['searchInput'];
+            $chars = str_split($word);
+
+            if($chars[0]=='"'){
+                $isStopList = 1;
+                for($i=1; $i<count($chars)-1; $i++)
+                    $array[$i-1]=$chars[$i];
+                $word = implode($array);
+            }
+            else
+                $isStopList = 0;
+        }
         else {
             echo "<h2 style='color:white;'>Can't fetch word</h2>";
             return;
@@ -10,7 +21,7 @@
         $bla = "bla";
         $rows = explode(" ", $word);
         $numOfWords = count($rows);
-        $isStopList = 0;
+        //$isStopList = 0;
         $replace = " REPLACE(word, ' ', '') ";
         $queryToEx = "select
 			word as Word,
