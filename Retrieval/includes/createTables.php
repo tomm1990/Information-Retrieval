@@ -74,25 +74,34 @@
             foreach($matches as $match)
             {
                 $word = strtolower($match[0]);
-                $addToSql="INSERT INTO Hits (fileNo, word, offset, hits,isStopList)
-                            VALUES ('$filesCounter', '$word', '$wordsCounter', 1, FALSE)
-                            ON DUPLICATE KEY UPDATE hits = hits + 1";
+
+                if($word != "you")
+                    $isStopList = 1;
+
+                else $isStopList = 0;
+
+//                $addToSql="INSERT INTO Hits (fileNo, word, offset, hits,isStopList)
+//                            VALUES ('$filesCounter', '$word', '$wordsCounter', 1, FALSE)
+//                            ON DUPLICATE KEY UPDATE hits = hits + 1";
+
                 $addToSql_StopList = "INSERT INTO Hits (fileNo, word, offset,                               hits,isStopList)
-                            VALUES ('$filesCounter', '$word', '$wordsCounter', 1, TRUE)
+                            VALUES ('$filesCounter', '$word', '$wordsCounter', 1, '$isStopList')
                             ON DUPLICATE KEY UPDATE hits = hits + 1";
 
-                if($lyrics){
-                   if(  strcmp($word , "back") != 0  ){
-                       echo "good : ".$word."<br>";
-                       mysqli_query($connection, $addToSql);
-                       $wordsCounter++;
-                   }
-                    else{
-                        echo "bad : ".$word."<br>";
+               // if($lyrics){
+//                   if(strcmp($word , 'you') == 0  ){
+//                       //echo "good : ".$word."<br>";
+//                       mysqli_query($connection, $addToSql);
+//                       $wordsCounter++;
+//                   }
+//                    else{
+                        //echo "bad : ".$word."<br>";
+
                         mysqli_query($connection, $addToSql_StopList);
                         $wordsCounter++;
-                    }
-                }
+
+                //    }
+              //  }
 
 
 //                if($lyrics

@@ -22,6 +22,15 @@
             group by FileNum
             order by FileNum";
 
+        // connect
+        include('connection.php');
+
+        $getWordId = "select id from Hits where REPLACE(word, ' ', '') = '".$word."' LIMIT 1 ";
+        $result = mysqli_query($connection, $getWordId);
+        while($ID = mysqli_fetch_array($result)){
+            $wordId = $ID["id"];
+        }
+
         if($numOfWords == 1){
             // if the word is different from OR, AND, NOT
             if( strcmp($rows[0],"OR")!=0
@@ -64,7 +73,7 @@
 
 
         // send query to sql hits table
-        $result = mysqli_query($connection,$queryToEx)
+        $result = mysqli_query($connection, $queryToEx)
             or die("<h2 style='font-family: Levenim MT , arial; color : aliceblue;'>Error : ".mysqli_error($connection)."<br>".$queryToEx."</h2>" );
 
         // count the rows in the results
@@ -100,13 +109,12 @@
         while($row = mysqli_fetch_array($result)){
             $w = $row["Word"];
             $i = $row["FileNum"];
-            echo '<tr onclick="javascript:toFile('.$i.','.$w.');"><a href="#">';
+            echo '<tr onclick="javascript:toFile('.$i.','.$wordId.');"><a href="#">';
 
             echo '<script type="text/javascript">
-                function toFile(value, tosearch){
-                    console.log(value+" and "+tosearch );
+                function toFile(value, id){
                     path =  "../data/file"+value+".txt";
-                    window.open("http://localhost:8080//Retrieval/Retrieval/includes/getLyrics.php?file=../data/file"+value+".txt"+"&word="+tosearch+", "", "width=700,height=800");
+                    window.open("http://localhost:8080//Retrieval/Retrieval/includes/getLyrics.php?file=../data/file"+value+".txt&word="+id+"", "", "width=700,height=800");
                 }
              </script>';
             {

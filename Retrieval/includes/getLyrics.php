@@ -2,14 +2,28 @@
 
     function getLyrics()
     {
+        $markFlag =0;
+
         // Init
         if(isset($_GET['file']))
             $fileName = $_GET['file'];
 
         if(isset($_GET['word'])){
             $tosearch = $_GET['word'];
+
+            $markFlag =1;
+            // connect
+            include('connection.php');
+
+            // Get Word by Id
+            $getWord = "select word from Hits where id = '".$tosearch."'";
+            $result = mysqli_query($connection, $getWord);
+            while($ID = mysqli_fetch_array($result)){
+                $wordId = $ID["word"];
+            }
+
             // Mark the word
-            echo("".$tosearch."");
+            echo("Mark the Word: ".$wordId."");
         }
 
         $txt_file = file_get_contents(''.$fileName.'');
@@ -43,8 +57,12 @@
                 echo '<img src="../'.$info[$row]['data'].'" style="width:150px; float: left; margin-top: -160px;">';
             if($counter==6)
                 echo '<div style="clear:both;"><br>';
-            if($counter>7)
+            if($counter>7){
+                if($markFlag){
+                    // here we should mark (.$wordId.)
+                }
                 echo '<p style="font-size: 15px; color: #ffffff; font-weight: normal;">' . $info[$row]['data'] . '<br />';
+            }
 
         }
 
