@@ -28,7 +28,7 @@
     $path = getcwd()."/source/".$filename."";
 
     // creating new file
-    $newfile = getcwd()."/data/file".$filesCounter.".txt";
+    $newfile = getcwd()."/data/".$filename."";
 
     if( !file_exists( $newfile ) ){
         copy($path, $newfile);

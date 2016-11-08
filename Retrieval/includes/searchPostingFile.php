@@ -125,7 +125,7 @@
             echo '<script type="text/javascript">
                 function toFile(value, id){
                     path =  "../data/file"+value+".txt";
-                    window.open("http://localhost:8080//Retrieval/Retrieval/includes/getLyrics.php?file=../data/file"+value+".txt&word="+id+"", "", "width=700,height=800");
+                    window.open("http://localhost:8080//Retrieval/Retrieval/includes/getLyrics.php?file="+value+"&word="+id+"", "", "width=700,height=800");
                 }
              </script>';
             {

@@ -10,7 +10,7 @@
         // create sql files table
         $sqlFiles ="CREATE TABLE Files(
             fileID INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-            fileName VARCHAR(30) ,
+            fileName VARCHAR(80) ,
             songName VARCHAR(30) ,
             songAuthor VARCHAR(30) ,
             songDate VARCHAR(10),

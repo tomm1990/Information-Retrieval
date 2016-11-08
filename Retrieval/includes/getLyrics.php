@@ -12,8 +12,32 @@
 
         // Init
         if(isset($_GET['file']))
-            $fileName = $_GET['file'];
+            $fileId = $_GET['file'];
 
+        // craate sql connection
+        include('connection.php');
+
+        // make query to sql files table
+        $query = "select * from Files";
+
+        // send query to sql files table
+        $result = mysqli_query($connection , $query);
+        if( !$result ){
+            echo "DB query failed from file_bars.php";
+            die("DB query failed from file_bars.php");
+        }
+
+        // print all sql data rows
+        while( $row = mysqli_fetch_assoc($result) ){
+            if($fileId == $row["fileID"])
+                $fileName = $row["fileName"];
+        }
+
+        // close sql connection
+        mysqli_free_result($result);
+        mysqli_close($connection);
+
+        // Case need to mark word
         if(isset($_GET['word'])){
             $tosearch = $_GET['word'];
 
@@ -30,8 +54,7 @@
 
             // Mark the word
             echo "<span>Search:</span>
-                        <input type='text' name='keyword' class='form-control input-sm' value='".$wordId."'>"
-;
+                        <input type='text' name='keyword' class='form-control input-sm' value='".$wordId."'>";
         }
 
         $txt_file = file_get_contents(''.$fileName.'');
