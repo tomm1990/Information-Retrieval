@@ -3,6 +3,7 @@ Trouble;
 2000;
 Summary;
 images/coldplay.jpg;
+Coldplay-Trouble.mp3;
 
 lyrics:
 Oh, no, I see

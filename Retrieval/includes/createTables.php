@@ -16,7 +16,8 @@
             songDate VARCHAR(10),
             songSummary VARCHAR(130),
             songLyrics VARCHAR(2000),
-            songPic VARCHAR(100)
+            songPic VARCHAR(100),
+            mp3Name VARCHAR(100)
             )";
 
         // create sql hits table
@@ -74,36 +75,37 @@
             foreach($matches as $match)
             {
                 $word = strtolower($match[0]);
+                if($lyrics){
+                    //$word = strtolower($match[0]);
+                    if(($word == " you")||
+                       ($word == " a")||
+                       ($word == " i")||
+                       ($word == " is")||
+                       ($word == " and")||
+                       ($word == " the")||
+                       ($word == " to")||
+                       ($word == " me")||
+                       ($word == " in")||
+                       ($word == " be")||
+                       ($word == " of")||
+                       ($word == " so")||
+                       ($word == " he")||
+                       ($word == " or")||
+                       ($word == " by")||
+                       ($word == " as")||
+                       ($word == " it"))
+                        $isStopList = 1;
 
-                if(($word == " you")||
-                   ($word == " a")||
-                   ($word == " i")||
-                   ($word == " is")||
-                   ($word == " and")||
-                   ($word == " the")||
-                   ($word == " to")||
-                   ($word == " me")||
-                   ($word == " in")||
-                   ($word == " be")||
-                   ($word == " of")||
-                   ($word == " so")||
-                   ($word == " he")||
-                   ($word == " or")||
-                   ($word == " by")||
-                   ($word == " as")||
-                   ($word == " it"))
-                    $isStopList = 1;
+                    else $isStopList = 0;
 
-                else $isStopList = 0;
+                    $addToSql = "INSERT INTO Hits (fileNo, word, offset,                               hits,isStopList)
+                        VALUES ('$filesCounter', '$word', '$wordsCounter', 1, '$isStopList')
+                        ON DUPLICATE KEY UPDATE hits = hits + 1";
 
-                $addToSql = "INSERT INTO Hits (fileNo, word, offset,                               hits,isStopList)
-                    VALUES ('$filesCounter', '$word', '$wordsCounter', 1, '$isStopList')
-                    ON DUPLICATE KEY UPDATE hits = hits + 1";
-
-                mysqli_query($connection, $addToSql);
-                $wordsCounter++;
-
-
+                    mysqli_query($connection, $addToSql);
+                    $wordsCounter++;
+                }
+                //if($word == "lyrics") $lyrics = true;
                 if( strcmp($word,'lyrics')!=0 ) $lyrics = true;
                 if(!array_key_exists($word, $invertedIndex)) $invertedIndex[$word] = [];
                 if(!in_array($filename, $invertedIndex[$word], true)) $invertedIndex[$word][] = $filename;
@@ -111,8 +113,8 @@
 
             $new_arr = array_map('trim', explode(';', $data));
 
-            $addToFile="INSERT INTO Files (fileName,songName,songAuthor,songDate,songSummary,songPic)
-                  VALUES ('$filename','$new_arr[1]','$new_arr[0]','$new_arr[2]','$new_arr[3]','$new_arr[4]')";
+            $addToFile="INSERT INTO Files (fileName,songName,songAuthor,songDate,songSummary,songPic,mp3Name)
+                  VALUES ('$filename','$new_arr[1]','$new_arr[0]','$new_arr[2]','$new_arr[3]','$new_arr[4]','$new_arr[5]')";
 
             if (mysqli_query($connection, $addToFile)) {
                     //echo "<b>File successfully</b><br>";
@@ -122,6 +124,11 @@
 
             $lyrics = false;
         }
+
+        // close sql connection
+        mysqli_free_result($result);
+        mysqli_close($connection);
+
         return $invertedIndex;
     }
 

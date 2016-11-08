@@ -86,7 +86,7 @@
         $num_rows = mysqli_num_rows($result);
 
         echo "<h2 style='font-family: Levenim MT , arial;
-    color : aliceblue; font-size: 25px; margin-left: 400px; font-weight: 300; margin-top: 30px; margin-bottom: 20px;'>".$num_rows." Results Found</h2>";
+    color : aliceblue; font-size: 25px; margin-left: 400px; font-weight: 300; margin-top: 30px; margin-bottom: 20px;'>".$num_rows." Documents Found</h2>";
 
         // print first table row
         echo '<table style="margin: 0px auto; border-collapse: collapse; cellspacing="0" cellpadding="0";">';

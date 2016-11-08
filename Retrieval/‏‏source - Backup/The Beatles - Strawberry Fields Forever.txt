@@ -3,9 +3,10 @@ Strawberry Fields Forever;
 1967;
 Summary;
 images/Strawberry.jpg;
+TheBeatles-StrawberryFieldsForever.mp3;
 
 lyrics:
-Let me take you down, 'cause I'm going to Strawberry Fields
+Let me take you down, cause I'm going to Strawberry Fields
 Nothing is real and nothing to get hung about
 Strawberry Fields forever
 
@@ -27,7 +28,7 @@ Strawberry Fields forever
 
 Always, no sometimes, think it's me
 But you know I know when it's a dream
-I think I know I mean a "Yes" but it's all wrong
+I think I know I mean a Yes but it's all wrong
 That is I think I disagree
 
 Let me take you down, cause I'm going to Strawberry Fields

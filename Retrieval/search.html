@@ -55,7 +55,7 @@
 
                     <div class="clear"></div>
 
-                    <form name="form" method="get">
+                    <form id="form" name="form" method="get">
                         <label>Search</label>
                         <div class="clear"></div>
                         <input class="searchInput" id="searchInput" type="text" ng-model="myValue" ng-change=search=1 name="searchInput" value="" placeholder="Enter a Word" onchange="doSomething(value);">
@@ -79,7 +79,7 @@
 
 
                     <div ng-show="search" id="searchBox">
-                        <iframe id="iframeSearch" name="myPHPScript" src="includes/search.php?searchInput=" height="100%" frameborder="0">
+                        <iframe id="iframeSearch" name="myPHPScript" src="includes/search.php?searchInput=get" height="100%" frameborder="0">
                         </iframe>
                     </div>
 

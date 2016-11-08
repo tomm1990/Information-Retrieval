@@ -3,6 +3,7 @@ A Hard Days Night;
 1964;
 Summary;
 images/Night.jpg;
+TheBeatles-AHardDaysNight.mp3;
 
 lyrics:
 It's been a hard day's night, and I'd been working like a dog
