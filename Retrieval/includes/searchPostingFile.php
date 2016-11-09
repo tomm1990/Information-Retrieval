@@ -56,8 +56,10 @@
             if (strcmp($rows[0],"NOT")==0){
                 //  "NOT" statement was found
                 $queryToEx .= " WHERE NOT ".$replace.' ="'.$rows[1].'"  '.$andStopList.' ';
-                // debbuging
-                //echo "<Br><H2 style='color:white; font-size: 20px;'>".$queryToEx."</h2>";
+                // ****************************************************
+                // gal: need to fix this :
+                // notStatement($rows[1] , $isStopList);
+                // return;
             } else{
                 //echo "<Br><H2 style='color:white; font-size: 20px;'>Please provide another values</h2>";
             }
@@ -65,7 +67,10 @@
             if( strcmp($rows[1],"AND")==0 || strcmp($rows[1],"&&")==0 ){
 
             } else if( strcmp($rows[1],"OR")==0 || strcmp($rows[1],"||")==0 || strcmp($rows[1],"|")==0 ){
-
+                // ****************************************************
+                // gal: need to fix this :
+                // orStatement($rows[0] , $isStopListA , $rows[2] , $isStopListB);
+                // return;
             } else {
 
             }
@@ -197,4 +202,156 @@
 
     // start
     getSearchPostingFile();
+
+//    function notStatement($word , $andStopList)
+//    {
+//        $dropM1 = "drop view if exists  m1";
+//        $dropM2 = "drop view if exists  m2";
+//
+//        $m2 = "create view m2 as (
+//                Select fileNo
+//                From Hits
+//                group by fileNo)";
+//
+//        $m1 = "create view  m1 as(
+//                Select fileNo
+//                From myDB.Hits
+//                where REPLACE(word,' ','') = ('".$word"') ANd isStopList=".$andStopList." )";
+//
+//        $tdOpen = '<td style="padding-left:20px; border:none ! important; font-size: 20px; color: #fff; font-color: #fff; height: 40px; width: 130px; background: url(../images/frow.png); "><span style="font-family: "Levenim MT" , arial;">';
+//
+//        $tdClose = '</span></td>';
+//
+//        // craate sql connection
+//        include('connection.php');
+//
+//        // send query to sql hits table
+//        $result = mysqli_query($connection,$dropM1) or die("<h2 style='font-family: Levenim MT , arial; color : aliceblue;'>Error : ".mysqli_error($connection)."<br>".$dropM1."</h2>");
+//
+//        $result = mysqli_query($connection,$dropM2) or die("<h2 style='font-family: Levenim MT , arial; color : aliceblue;'>Error : ".mysqli_error($connection)."<br>".$dropM2."</h2>");
+//
+//        $result = mysqli_query($connection,$m2) or die("<h2 style='font-family: Levenim MT , arial; color : aliceblue;'>Error : ".mysqli_error($connection)."<br>".$m2."</h2>");
+//
+//        $result = mysqli_query($connection,$m1) or die("<h2 style='font-family: Levenim MT , arial; color : aliceblue;'>Error : ".mysqli_error($connection)."<br>".$m1."</h2>");
+//
+//        $queryToEx = "SELECT * FROM m2 WHERE fileNo NOT IN (SELECT * FROM m1); ";
+//
+//        $result = mysqli_query($connection,$queryToEx) or die("<h2 style='font-family: Levenim MT , arial; color : aliceblue;'>Error : ".mysqli_error($connection)."<br>".$queryToEx."</h2>");
+//
+//
+//
+//        // count the rows in the results
+//        $num_rows = mysqli_num_rows($result);
+//
+//        // close sql connection
+//        mysqli_close($connection);
+//
+//        // headline
+//        if($num_rows==0) {
+//            echo "<h2 style='font-family: Levenim MT , arial;
+//            color : #ffa8a8 ; font-size: 25px; margin-left: 400px; font-weight: 300; margin-top: 30px; margin-bottom: 20px;'>No Results</h2>";
+//            return;
+//        } else{
+//            echo "<h2 style='font-family: Levenim MT , arial;
+//            color : aliceblue; font-size: 25px; margin-left: 360px; font-weight: 300;'>".$num_rows." Documents Found</h2>";
+//        }
+//
+//        // table definition
+//        echo '<table style="margin: 0px auto; border-collapse: collapse; cellspacing="0" cellpadding="0";">';
+//
+//        // first table row print
+//        echo '<tr ><a href="#">';
+//        {
+//            echo $tdOpen.' Word '.$tdClose;
+//            echo $tdOpen.' From File No. '.$tdClose;
+//            //echo $tdOpen.' Hits '.$tdClose;
+//        }
+//        echo'</a></tr>';
+//
+//        // print table
+//        while($row = mysqli_fetch_array($result)){
+//            $i = $row["fileNo"];
+//            echo '<tr><a href="#">';
+//            {
+//                echo $tdOpen."NOT ".$word.$tdClose;
+//                echo $tdOpen.$i.$tdClose;
+//                //echo $tdOpen.$row["HitsFromFile"].$tdClose;
+//            }
+//            echo'</a></tr>';
+//        }
+//        echo '</table>';
+//
+//        //free memory
+//        mysqli_free_result($result);
+//
+//        return;
+//    }
+
+//    function orStatement($wordA , $slA, $wordB, $slB){
+//        $queryToEx = "Select fileNo
+//                    From Hits
+//                    where
+//                    REPLACE(word,' ','') = ('".$wordA."') ANd isStopList=".$slA."
+//                    OR
+//                    REPLACE(word,' ','') = ('".$wordB."') ANd isStopList=".$slB."
+//                    group by fileNo";
+//
+//        $tdOpen = '<td style="padding-left:20px; border:none ! important; font-size: 20px; color: #fff; font-color: #fff; height: 40px; width: 130px; background: url(../images/frow.png); "><span style="font-family: "Levenim MT" , arial;">';
+//
+//        $tdClose = '</span></td>';
+//
+//        // craate sql connection
+//        include('connection.php');
+//
+//        $result = mysqli_query($connection,$queryToEx) or die("<h2 style='font-family: Levenim MT , arial; color : aliceblue;'>Error : ".mysqli_error($connection)."<br>".$queryToEx."</h2>");
+//
+//
+//        // count the rows in the results
+//        $num_rows = mysqli_num_rows($result);
+//
+//        // close sql connection
+//        mysqli_close($connection);
+//
+//        // headline
+//        if($num_rows==0) {
+//            echo "<h2 style='font-family: Levenim MT , arial;
+//            color : #ffa8a8 ; font-size: 25px; margin-left: 400px; font-weight: 300; margin-top: 30px; margin-bottom: 20px;'>No Results</h2>";
+//            return;
+//        } else{
+//            echo "<h2 style='font-family: Levenim MT , arial;
+//            color : aliceblue; font-size: 25px; margin-left: 360px; font-weight: 300;'>".$num_rows." Documents Found</h2>";
+//        }
+//
+//        // table definition
+//        echo '<table style="margin: 0px auto; border-collapse: collapse; cellspacing="0" cellpadding="0";">';
+//
+//        // first table row print
+//        echo '<tr ><a href="#">';
+//        {
+//            echo $tdOpen.' Word '.$tdClose;
+//            echo $tdOpen.' From File No. '.$tdClose;
+//            //echo $tdOpen.' Hits '.$tdClose;
+//        }
+//        echo'</a></tr>';
+//
+//        // print table
+//        while($row = mysqli_fetch_array($result)){
+//            $i = $row["fileNo"];
+//            echo '<tr><a href="#">';
+//            {
+//                echo $tdOpen.$wordA." OR ".$wordB.$tdClose;
+//                echo $tdOpen.$i.$tdClose;
+//                //echo $tdOpen.$row["HitsFromFile"].$tdClose;
+//            }
+//            echo'</a></tr>';
+//        }
+//        echo '</table>';
+//
+//        //free memory
+//        mysqli_free_result($result);
+//
+//        return;
+//    }
+
+
 ?>
