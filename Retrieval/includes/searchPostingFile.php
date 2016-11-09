@@ -3,6 +3,7 @@
         // Get Search Input & find
         if(isset($_GET['searchInput'])){
             $word = $_GET['searchInput'];
+            //echo $word;
             $chars = str_split($word);
 
             if($chars[0]=='"'){
@@ -20,6 +21,8 @@
         }
         $bla = "bla";
         $rows = explode(" ", $word);
+
+
         $numOfWords = count($rows);
         //$isStopList = 0;
         $replace = " REPLACE(word, ' ', '') ";
@@ -55,11 +58,11 @@
             // if $rows[0] == "NOT"
             if (strcmp($rows[0],"NOT")==0){
                 //  "NOT" statement was found
-                $queryToEx .= " WHERE NOT ".$replace.' ="'.$rows[1].'"  '.$andStopList.' ';
+                //$queryToEx .= " WHERE NOT ".$replace.' ="'.$rows[1].'"  '.$andStopList.' ';
                 // ****************************************************
                 // gal: need to fix this :
-                // notStatement($rows[1] , $isStopList);
-                // return;
+                //notStatement($rows[1] , 0);
+                //return;
             } else{
                 //echo "<Br><H2 style='color:white; font-size: 20px;'>Please provide another values</h2>";
             }
@@ -72,7 +75,7 @@
             } else if( strcmp($rows[1],"OR")==0 || strcmp($rows[1],"||")==0 || strcmp($rows[1],"|")==0 ){
                 // ****************************************************
                 // gal: need to fix this :
-                // orStatement($rows[0] , $isStopListA , $rows[2] , $isStopListB);
+                 //orStatement($rows[0] , $isStopListA , $rows[2] , $isStopListB);
                 // return;
             } else {
                 //echo "<Br><H2 style='color:white; font-size: 20px;'>Please provide another values</h2>";
@@ -289,7 +292,7 @@
 //
 //        return;
 //    }
-//
+
 //    function orStatement($wordA , $slA, $wordB, $slB)
 //    {
 //        $queryToEx = "Select fileNo
