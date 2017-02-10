@@ -1,10 +1,9 @@
 <?php
-
     //craate sql connection
     $servername = "localhost";
-    $username = "galServer";
-    $password = "301gals20";
-    $dbname = "myDB";
+    $username = "retuser";
+    $password = "retuser!";
+    $dbname = "inforet";
 
     // Create connection
     $connection = mysqli_connect($servername, $username, $password, $dbname);
@@ -13,5 +12,4 @@
     if (!$connection) {
         die("Connection failed: " . mysqli_connect_error());
     }
-
 ?>
