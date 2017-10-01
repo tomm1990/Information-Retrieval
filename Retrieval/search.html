@@ -29,8 +29,8 @@
 
         <script>
             function refreshPage(){
-                $.post("http://localhost:8080/Retrieval/Retrieval/includes/createTables.php");
-                window.open("http://localhost:8080/Retrieval/Retrieval/intro.html","_self");
+                $.post("includes/createTables.php");
+                window.open("intro.html","_self");
                 window.location.reload(true);
             }
         </script>
@@ -42,7 +42,7 @@
             <header>
                 <h1>Information Retrieval System</h1>
                 <nav><ul>
-                    <li><a class="activeLine" href="intro.html">Files</a></li>
+                    <!--<li><a class="activeLine" href="intro.html">Files</a></li>-->
                      <li><a href="index.html">Index</a></li>
                      <li><a href="search.html">Search</a></li>
                      <li><a href="about.html">About</a></li>
@@ -51,7 +51,6 @@
             </header>
 
             <div class="files_container">
-
                     <div class="clear"></div>
 
                     <form id="form" name="form" method="get">
@@ -59,8 +58,6 @@
                         <div class="clear"></div>
                         <input class="searchInput" id="searchInput" type="text" ng-model="myValue" ng-change=search=1 name="searchInput" value="" placeholder="Enter a Word" onchange="doSomething(value);">
                     </form>
-
-
 
                     <script type="text/javascript">
                         function doSomething(value) {

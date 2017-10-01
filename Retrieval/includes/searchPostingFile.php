@@ -131,12 +131,12 @@
         while($row = mysqli_fetch_array($result)){
             $w = $row["Word"];
             $i = $row["FileNum"];
-            echo '<tr onclick="javascript:toFile('.$i.','.$wordId.');"><a href="#">';
+            echo '<tr style="cursor:pointer;" onclick="javascript:toFile('.$i.','.$wordId.');"><a href="#">';
 
             echo '<script type="text/javascript">
                 function toFile(value, id){
                     path =  "../data/file"+value+".txt";
-                    window.open("http://localhost:8080//Retrieval/Retrieval/includes/getLyrics.php?file="+value+"&word="+id+"", "", "width=700,height=800");
+                    window.open("getLyrics.php?file="+value+"&word="+id+"", "", "width=700,height=800");
                 }
              </script>';
             {

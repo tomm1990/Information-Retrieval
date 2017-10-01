@@ -29,8 +29,8 @@
 
         <script>
             function refreshPage(){
-                $.post("http://localhost:8080/Retrieval/Retrieval/includes/createTables.php");
-                window.open("http://localhost:8080/Retrieval/Retrieval/intro.html","_self");
+                $.post("includes/createTables.php");
+                window.open("intro.html","_self");
                 window.location.reload(true);
             }
         </script>
@@ -42,12 +42,13 @@
             <header>
                 <h1>Information Retrieval System</h1>
                 <nav><ul>
-                    <li><a class="activeLine" href="intro.html">Files</a></li>
+                    <!--<li><a class="activeLine" href="intro.html">Files</a></li>-->
                      <li><a href="index.html">Index</a></li>
                      <li><a href="search.html">Search</a></li>
                      <li><a href="about.html">About</a></li>
                      <li><a href="javascript:refreshPage();" id="refreshBtn"></a></li>
                 </ul></nav>
+                <div class="clear"></div>
             </header>
 
             <div class="files_container">
@@ -84,23 +85,16 @@
                             iframe.id = "iframeTables";
                             iframe.frameBorder = "0";
                             iframe.height = "100%";
-                            var html = "http://localhost:8080/Retrieval/Retrieval/includes/getTables.php?sort="+sort+"";
+                            var html = "includes/getTables.php?sort="+sort+"";
                             iframe.src = encodeURI(html);
                             console.log("iframe: "+iframe.src);
                             document.getElementById("contentTable").appendChild(iframe);
                         }
                     </script>
 
-
                     <div class="clear"></div>
-
             </div>
         </div>
-
-
-
-
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
     </body>
