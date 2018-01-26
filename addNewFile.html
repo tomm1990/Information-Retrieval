@@ -52,9 +52,9 @@
                 $(document).ready(function(){
                     $("#uploadBtn").click(function(){
                         alert("System Refreshed Successfully");
-                        $.post("http://localhost:8080/Retrieval/Retrieval/includes/createTables.php");
-                        window.open("http://localhost:8080/Retrieval/Retrieval/intro.html","_self");
-                        location = "http://localhost:8080/Retrieval/Retrieval/intro.html";
+                        $.post("includes/createTables.php");
+                        window.open("intro.html","_self");
+                        location = "intro.html";
                         window.location.reload(true);
                     });
                 });
@@ -62,8 +62,8 @@
                 }
 
                 function refreshPage(){
-                    $.post("http://localhost:8080/Retrieval/Retrieval/includes/createTables.php");
-                    window.open("http://localhost:8080/Retrieval/Retrieval/intro.html","_self");
+                    $.post("includes/createTables.php");
+                    window.open("intro.html","_self");
                     window.location.reload(true);
                 }
 

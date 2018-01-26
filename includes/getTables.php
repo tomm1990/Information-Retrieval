@@ -51,7 +51,7 @@
                     var html = "postingFile.php?searchId="+value+"";
                     iframe.src = encodeURI(html);
                     console.log("iframe: "+iframe.src);
-                    document.body.appendChild(iframe); window.open("http://localhost:8080//Retrieval/Retrieval/includes/postingFile.php?searchId="+value+"", "_self", "");
+                    document.body.appendChild(iframe); window.open("postingFile.php?searchId="+value+"", "_self", "");
                 }
             </script>';
 

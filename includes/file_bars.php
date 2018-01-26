@@ -35,7 +35,7 @@
 
     echo '<script type="text/javascript">
         function showLyrics(value) {
-              window.open("http://localhost:8080//Retrieval/Retrieval/includes/getLyrics.php?file="+value+"", "", "width=700,height=800");
+              window.open("includes/getLyrics.php?file="+value+"", "", "width=700,height=800");
         }
 
         function deleteFile(value){

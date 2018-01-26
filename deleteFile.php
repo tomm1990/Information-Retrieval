@@ -35,7 +35,7 @@
         // close sql connection
         mysqli_free_result($result);
         mysqli_close($connection);
-        header('Location: ../intro.html');
+        header('Location: intro.html');
 
     } else {
         echo 'Cant fetch filename';
